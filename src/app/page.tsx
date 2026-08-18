@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect } from 'react'
+import { Projector } from 'lucide-react'
 import { useStore } from '@/lib/store'
 import { Header } from '@/components/storefront/header'
 import { Hero } from '@/components/storefront/hero'
 import {
-  TrendingSection, FeaturedCategoriesSection, DealsSection,
-  BestSellersSection, RecentSection, TrustSection, CatalogGrid,
+  FeaturedCategoriesSection, TrustSection, CatalogGrid,
 } from '@/components/storefront/sections'
 import { Footer, CategoryFilterBar } from '@/components/storefront/footer'
 import { WhatsAppButton } from '@/components/storefront/whatsapp-button'
@@ -81,11 +81,22 @@ export default function Home() {
         {selectedCategory === 'all' ? (
           <>
             <Hero />
-            <TrendingSection products={products} loading={loading} />
+            {/* Main product catalog — shows ALL projectors */}
+            <section className="max-w-[1400px] mx-auto px-4 lg:px-6 py-12 lg:py-16">
+              <div className="flex items-end justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-navy/10 dark:bg-yellow/10 flex items-center justify-center">
+                    <Projector className="w-5 h-5 text-navy dark:text-yellow" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl lg:text-3xl font-extrabold tracking-tight" style={{ fontFamily: 'var(--font-display), system-ui' }}>All Projectors</h2>
+                    <p className="text-sm text-muted-foreground mt-0.5">{products.length} premium Magcubic projectors available</p>
+                  </div>
+                </div>
+              </div>
+              <CatalogGrid products={products} loading={loading} />
+            </section>
             <FeaturedCategoriesSection categories={categories.filter((c) => c.isFeatured)} />
-            <DealsSection products={products} loading={loading} />
-            <BestSellersSection products={products} loading={loading} />
-            <RecentSection products={products} loading={loading} />
             <TrustSection />
           </>
         ) : (

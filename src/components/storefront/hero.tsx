@@ -10,7 +10,8 @@ export function Hero() {
   const { products, categories, openModal, setSelectedCategory, setView, currency } = useStore()
   const [searchInput, setSearchInput] = useState('')
 
-  const trending = products.filter((p) => p.isTrending).slice(0, 3)
+  // Show first 3 projectors as preview cards (no longer using isTrending flag)
+  const trending = products.slice(0, 3)
   const featuredCats = categories.filter((c) => c.isFeatured).slice(0, 8)
 
   const onSearch = (e: React.FormEvent) => {
@@ -95,12 +96,11 @@ export function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
                   <div className="absolute bottom-0 p-4 text-white">
                     <div className="flex items-center gap-1 mb-1 text-[10px] font-semibold uppercase tracking-wider text-yellow">
-                      <TrendingUp size={11} /> Trending #1
+                      <TrendingUp size={11} /> Featured Projector
                     </div>
                     <div className="font-bold text-sm line-clamp-2">{trending[0].title}</div>
                     <div className="mt-2 flex items-center gap-2">
-                      <span className="text-yellow font-bold">{fmtPrice(trending[0].salePrice ?? trending[0].basePrice, currency)}</span>
-                      <span className="text-xs text-white/70 line-through">{fmtPrice(trending[0].basePrice, currency)}</span>
+                      <span className="text-yellow font-bold">{fmtPrice(trending[0].basePrice, currency)}</span>
                     </div>
                   </div>
                 </button>
@@ -114,7 +114,7 @@ export function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent" />
                   <div className="absolute bottom-0 p-3 text-white">
                     <div className="font-semibold text-xs line-clamp-1">{trending[1].title}</div>
-                    <div className="text-yellow font-bold text-sm">{fmtPrice(trending[1].salePrice ?? trending[1].basePrice, currency)}</div>
+                    <div className="text-yellow font-bold text-sm">{fmtPrice(trending[1].basePrice, currency)}</div>
                   </div>
                 </button>
               )}
@@ -129,7 +129,7 @@ export function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent" />
                   <div className="absolute bottom-0 p-3 text-white">
                     <div className="font-semibold text-xs line-clamp-1">{trending[2].title}</div>
-                    <div className="text-yellow font-bold text-sm">{fmtPrice(trending[2].salePrice ?? trending[2].basePrice, currency)}</div>
+                    <div className="text-yellow font-bold text-sm">{fmtPrice(trending[2].basePrice, currency)}</div>
                   </div>
                 </button>
               )}
