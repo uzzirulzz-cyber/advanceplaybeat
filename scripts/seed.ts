@@ -13,7 +13,7 @@ const CATEGORIES = [
   { name: 'Gift Cards', slug: 'gift-cards', description: 'Digital gift cards for Steam, PlayStation, Xbox, Google Play, iTunes, Amazon and more.', imageUrl: 'https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1513885535751-8b9238bd3e05?w=1600&q=80', sortOrder: 3, isFeatured: true },
   { name: 'Streaming', slug: 'streaming', description: 'Premium subscriptions for Netflix, Spotify, Disney+, YouTube Premium, HBO Max and Prime Video.', imageUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe7a?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1522869635100-9f4465a86a72?w=1600&q=80', sortOrder: 4, isFeatured: true },
   { name: 'IPTV', slug: 'iptv', description: 'Premium IPTV subscriptions with HD/4K channels, VOD libraries and multi-device support.', imageUrl: 'https://images.unsplash.com/photo-1593784991095-a2055888d3f1?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1521903101605-0a8d2c8b7ef8?w=1600&q=80', sortOrder: 5, isFeatured: true },
-  { name: 'Smart Projectors', slug: 'smart-projectors', description: 'Premium smart projectors — 4K UHD, laser, portable, and home cinema with smart OS and built-in apps.', imageUrl: 'https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe7a?w=1600&q=80', sortOrder: 6, isFeatured: true },
+  { name: 'Smart Projectors', slug: 'smart-projectors', description: 'Premium Magcubic smart projectors — HY300, HY300 Pro, HY300 Plus, HT23, HCS350, HM103-A, HY7 with Android TV, Wi-Fi 6, and 4K support.', imageUrl: 'https://www.zerobyte.store/cdn/shop/files/S6002d940582649c9be0292811be6b4e5I.jpg', bannerUrl: 'https://www.zerobyte.store/cdn/shop/files/HCS350_PRO_WHITE.png', sortOrder: 6, isFeatured: true },
   { name: 'Web3', slug: 'web3', description: 'NFTs, blockchain tools, crypto wallets, smart contract audits and DeFi utilities.', imageUrl: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?w=1600&q=80', sortOrder: 7, isFeatured: false },
   { name: 'Services', slug: 'services', description: 'Professional services — design, development, writing, voice-over and video editing.', imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&q=80', sortOrder: 8, isFeatured: false },
   { name: 'Subscriptions', slug: 'subscriptions', description: 'Recurring premium subscriptions for SaaS, productivity, education and entertainment.', imageUrl: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80', bannerUrl: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1600&q=80', sortOrder: 9, isFeatured: false },
@@ -526,189 +526,361 @@ const PRODUCTS: ProductSeed[] = [
     ],
   },
 
-  // ===== SMART PROJECTORS =====
+  // ===== SMART PROJECTORS (real Magcubic products from zerobyte.store) =====
   {
-    title: 'PlayBeat 4K UHD Smart Projector Pro X1',
-    slug: 'playbeat-4k-pro-x1',
-    shortDesc: 'Native 4K UHD laser projector with 3,500 lumens, Android TV 11, HDR10+, and 50,000-hour laser life.',
-    description: 'The PlayBeat 4K Pro X1 is a premium home cinema projector featuring native 3840×2160 4K UHD resolution, 3,500 ANSI lumens brightness, and a triple-laser light source rated for 50,000 hours. Powered by Android TV 11 with Google Play Store access for Netflix, YouTube, Prime Video, and Disney+. Includes Dolby Audio, auto-keystone, autofocus, 4K HDR10+ support, and a built-in 30W speaker system.',
+    title: 'Magcubic HY300 PRO',
+    slug: 'magcubic-hy300-pro',
+    shortDesc: '290 ANSI, Manual Focus, Android 14, 8K support, Dual Wi-Fi 6, BT 5.4 Projector.',
+    description: 'The Magcubic HY300 PRO is a powerful portable smart projector featuring 290 ANSI lumens brightness, manual focus, Android 14.0 OS, and 8K video decoding support. With native 1280x720P resolution (supports up to 1080p/2K/4K decoding via HD signal), dual Wi-Fi 6 (2.4G + 5G), and Bluetooth 5.4, this projector delivers crisp images and seamless streaming. Built-in 1/4 screw hole for tripod mounting, HDMI input, and remote controller included. Perfect for home cinema, gaming, and outdoor movie nights.',
     type: 'DIGITAL',
     categorySlug: 'smart-projectors',
-    basePrice: 89999, salePrice: 64999, sku: 'PB-SP-PROX1',
-    imageUrl: 'https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=800&q=80',
-    galleryUrls: ['https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=1200&q=80','https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=1200&q=80'],
-    features: ['Native 4K UHD (3840×2160)','3,500 ANSI lumens — daytime viewable','Triple-laser light source 50,000h','Android TV 11 + Google Play','HDR10+ and Dolby Vision','Dolby Audio 30W speakers','Auto keystone + autofocus','Wi-Fi 6 + Bluetooth 5.2','Chromecast built-in','3-year warranty'],
+    basePrice: 24750, salePrice: null, sku: 'PB-MGC-HY300PRO',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/S9fbe418fb0084a9a927f28e16a51bd25a.jpg',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/S9fbe418fb0084a9a927f28e16a51bd25a.jpg',
+      'https://cdn.shopify.com/s/files/1/0630/8524/8608/files/40d7_20260307_124446.jpg',
+      'https://cdn.shopify.com/s/files/1/0630/8524/8608/files/6c0d_20260307_124435.jpg',
+      'https://cdn.shopify.com/s/files/1/0630/8524/8608/files/76e6_20260307_124441.jpg',
+    ],
+    features: [
+      'Native 1280x720P, supports 8K video decoding',
+      '290 ANSI lumens brightness',
+      'Android 14.0 operating system',
+      'Dual Wi-Fi 6 (2.4G + 5G) + Bluetooth 5.4',
+      'Manual focus with keystone correction',
+      'Built-in 1/4 screw hole for tripod',
+      'HDMI input + remote controller included',
+      '1-year warranty',
+    ],
     specifications: [
-      {label:'Resolution',value:'Native 4K UHD (3840×2160)'},
-      {label:'Brightness',value:'3,500 ANSI lumens'},
-      {label:'Light Source',value:'Triple laser (RGB)'},
-      {label:'Lamp Life',value:'50,000 hours'},
-      {label:'OS',value:'Android TV 11'},
-      {label:'HDR',value:'HDR10+ / Dolby Vision'},
-      {label:'Audio',value:'Dolby Audio 30W'},
-      {label:'Connectivity',value:'HDMI 2.1 ×3, USB 3.0 ×2, SPDIF, 3.5mm, Wi-Fi 6, BT 5.2'},
-      {label:'Throw Ratio',value:'0.25:1 ultra short throw'},
-      {label:'Max Screen',value:'150 inches'},
-      {label:'Warranty',value:'3 years'},
+      {label:'Native Resolution',value:'1280x720P (720p HD)'},
+      {label:'Max Resolution',value:'8K decoding via HD signal'},
+      {label:'Brightness',value:'290 ANSI lumens'},
+      {label:'OS',value:'Android 14.0'},
+      {label:'CPU',value:'Quad-core ARM Cortex'},
+      {label:'Wi-Fi',value:'Dual 2.4G + 5G Wi-Fi 6'},
+      {label:'Bluetooth',value:'5.4'},
+      {label:'Connectivity',value:'HDMI, USB, 3.5mm AUX'},
+      {label:'Focus',value:'Manual'},
+      {label:'Warranty',value:'1 year'},
     ],
     faqs: [
-      {q:'Can this replace my TV?',a:'Yes — with 3,500 ANSI lumens, the Pro X1 is bright enough for daytime living room use on a 100"+ screen.'},
-      {q:'Does it support Netflix in 4K?',a:'Yes — Netflix, Prime Video, and Disney+ all stream in 4K UHD via the official Android TV apps.'},
-      {q:'Do I need a separate sound system?',a:'The built-in 30W Dolby Audio system is excellent, but HDMI eARC output is included for connecting soundbars or AV receivers.'},
-      {q:'What\'s the throw distance for a 100" screen?',a:'With the ultra short throw lens, you only need 21cm from the wall for a 100" image.'},
+      {q:'Does it support Netflix and YouTube?',a:'Yes — with Android 14.0 built-in, you can install Netflix, YouTube, Prime Video, and Disney+ directly from Google Play Store.'},
+      {q:'Can I connect my phone?',a:'Yes — use Miracast for Android or AirPlay for iPhone via the built-in screen mirroring feature.'},
+      {q:"What's the maximum screen size?",a:'Recommended up to 100 inches in a darkened room. Best image quality at 60-80 inches.'},
     ],
-    tags: ['4k','laser','home-cinema','android-tv','smart','projector'],
-    rating: 4.9, reviewsCount: 342, salesCount: 1850, isFeatured: true, isBestSeller: true, isTrending: true, isDeal: true,
-    dealEndsAt: new Date(Date.now() + 3*24*60*60*1000),
+    tags: ['magcubic','hy300','projector','android','wifi6','portable','8k'],
+    rating: 4.7, reviewsCount: 312, salesCount: 1840, isFeatured: true, isBestSeller: true, isTrending: true,
     deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
     variants: [
-      { name: 'Standard (with stand)', durationDays: 0, price: 89999, salePrice: 64999, stock: 25 },
-      { name: 'Premium Bundle (with 100" screen)', durationDays: 0, price: 119999, salePrice: 89999, stock: 15 },
-      { name: 'Cinema Pro (with 120" ALR screen + soundbar)', durationDays: 0, price: 159999, salePrice: 124999, stock: 8 },
+      { name: 'Single Unit', durationDays: 0, price: 24750, stock: 30 },
+      { name: 'With Tripod', durationDays: 0, price: 26500, stock: 15 },
+      { name: 'With 80" Screen + Tripod', durationDays: 0, price: 34500, stock: 8 },
     ],
     inventoryKeys: [
-      { key: 'PB-SP-PROX1-SN-0001', keyType: 'LICENSE' },
-      { key: 'PB-SP-PROX1-SN-0002', keyType: 'LICENSE' },
-      { key: 'PB-SP-PROX1-SN-0003', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PRO-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PRO-SN-0002', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PRO-SN-0003', keyType: 'LICENSE' },
     ],
   },
   {
-    title: 'PlayBeat Portable Smart Projector Mini Go',
-    slug: 'playbeat-mini-go',
-    shortDesc: 'Compact 1080p portable projector with 700 lumens, Android TV, 2-hour battery, and built-in JBL speakers.',
-    description: 'The PlayBeat Mini Go is your ultimate entertainment companion — a compact 1.2kg portable projector with native 1080p resolution, 700 ANSI lumens, and a 2-hour built-in battery. Stream anything with Android TV 11 and Netflix pre-installed. Features JBL-tuned dual 8W speakers, auto-keystone, screen mirroring, and a carry case included.',
+    title: 'HY300 Plus Projector',
+    slug: 'hy300-plus-projector',
+    shortDesc: 'HY300 Plus — upgraded Magcubic with Android 14, 8K decoding, dual Wi-Fi 6, BT 5.4.',
+    description: 'The HY300 Plus is the upgraded variant of the popular Magcubic HY300 series, featuring Android 14.0, native 1280x720P resolution with 8K video decoding support, dual-band Wi-Fi 6, and Bluetooth 5.4. With improved brightness and color accuracy over the standard HY300, the Plus model delivers a sharper, more vibrant image. Perfect for home cinema, gaming, sports streaming, and outdoor entertainment.',
     type: 'DIGITAL',
     categorySlug: 'smart-projectors',
-    basePrice: 34999, salePrice: 24999, sku: 'PB-SP-MINIGO',
-    imageUrl: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&q=80',
-    features: ['Native 1080p (1920×1080)','700 ANSI lumens','2-hour built-in battery','Android TV 11 + Netflix','JBL-tuned dual 8W speakers','Auto keystone correction','Wi-Fi 5 + Bluetooth 5.0','Screen mirroring (AirPlay/Chromecast)','Only 1.2 kg','Carry case included'],
+    basePrice: 24750, salePrice: null, sku: 'PB-MGC-HY300PLUS',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/Se6ca806a4e03461fb8748fff3d1c187eI.webp',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/Se6ca806a4e03461fb8748fff3d1c187eI.webp',
+    ],
+    features: [
+      'Native 1280x720P, supports 8K decoding',
+      'Android 14.0 OS',
+      'Dual-band Wi-Fi 6 (2.4G + 5G)',
+      'Bluetooth 5.4',
+      'Improved brightness over standard HY300',
+      'Auto keystone correction',
+      'Built-in speaker + HDMI output',
+      '1-year warranty',
+    ],
     specifications: [
-      {label:'Resolution',value:'Native 1080p (1920×1080)'},
-      {label:'Brightness',value:'700 ANSI lumens'},
-      {label:'Light Source',value:'LED (30,000h life)'},
-      {label:'Battery',value:'2 hours playback'},
-      {label:'OS',value:'Android TV 11'},
-      {label:'Audio',value:'JBL dual 8W'},
-      {label:'Weight',value:'1.2 kg'},
-      {label:'Connectivity',value:'HDMI, USB-C, Wi-Fi 5, BT 5.0'},
-      {label:'Max Screen',value:'120 inches'},
-      {label:'Warranty',value:'2 years'},
+      {label:'Native Resolution',value:'1280x720P'},
+      {label:'Max Decoding',value:'8K'},
+      {label:'OS',value:'Android 14.0'},
+      {label:'Wi-Fi',value:'Dual-band 2.4G + 5G Wi-Fi 6'},
+      {label:'Bluetooth',value:'5.4'},
+      {label:'Connectivity',value:'HDMI, USB, AUX'},
+      {label:'Warranty',value:'1 year'},
     ],
     faqs: [
-      {q:'How long does the battery last?',a:'Up to 2 hours of continuous video playback at 50% brightness — perfect for a full movie.'},
-      {q:'Can I project on a plain wall?',a:'Yes, but for best results use a projector screen. Auto-keystone ensures a rectangular image on any angle.'},
-      {q:'Does it support screen mirroring?',a:'Yes — AirPlay for iPhone/iPad and Chromecast for Android are both built-in.'},
+      {q:'How is the HY300 Plus different from the HY300 PRO?',a:'The HY300 Plus has improved brightness and color accuracy, while the PRO variant adds 290 ANSI lumens and a manual focus ring for finer image control.'},
+      {q:'Can I install apps?',a:'Yes — Android 14.0 gives you full access to Google Play Store for Netflix, YouTube, Prime Video, Disney+, and more.'},
     ],
-    tags: ['portable','1080p','mini','android-tv','outdoor','projector'],
-    rating: 4.7, reviewsCount: 184, salesCount: 920, isFeatured: true, isTrending: true,
+    tags: ['magcubic','hy300','plus','projector','android','wifi6','8k'],
+    rating: 4.6, reviewsCount: 184, salesCount: 920, isFeatured: true, isTrending: true,
     deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
     variants: [
-      { name: 'Mini Go Only', durationDays: 0, price: 34999, salePrice: 24999, stock: 50 },
-      { name: 'Mini Go + Tripod', durationDays: 0, price: 39999, salePrice: 28999, stock: 30 },
-      { name: 'Mini Go + Tripod + 80" Screen', durationDays: 0, price: 49999, salePrice: 35999, stock: 15 },
+      { name: 'Single Unit', durationDays: 0, price: 24750, stock: 25 },
+      { name: 'With Free Tripod', durationDays: 0, price: 26500, stock: 12 },
     ],
     inventoryKeys: [
-      { key: 'PB-SP-MINIGO-SN-0001', keyType: 'LICENSE' },
-      { key: 'PB-SP-MINIGO-SN-0002', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PLUS-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PLUS-SN-0002', keyType: 'LICENSE' },
     ],
   },
   {
-    title: 'PlayBeat Laser Cinema Ultra 8K',
-    slug: 'playbeat-laser-8k-ultra',
-    shortDesc: '8K HDR laser projector with 5,000 lumens, ALR screen bundle, and immersive Dolby Atmos.',
-    description: 'The PlayBeat Laser Cinema Ultra 8K is our flagship projector — delivering true 8K resolution (7680×4320), 5,000 ANSI lumens, and a 3-color laser light source for stunning color accuracy (110% Rec.2020). Includes a 120" ALR (Ambient Light Rejecting) screen, Dolby Atmos audio system with wireless subwoofer, and professional installation. The ultimate home cinema experience.',
+    title: 'Magcubic HY300Pro Plus',
+    slug: 'magcubic-hy300pro-plus',
+    shortDesc: '290 ANSI, 180° flexible projection angle, Android 14, 8K native 1280x720P support.',
+    description: 'The Magcubic HY300Pro Plus is the premium tier of the HY300 lineup, featuring 290 ANSI lumens, native 1280x720P with 8K support, and a unique 180° flexible projection angle that lets you project on walls, ceilings, or any surface. Powered by Android 14 with Allwinner H723 Quad-core Cortex-A53 CPU and Mali-G31 GPU. Supports OpenGL ES 3.2 and OpenCL 2.0 for smooth 3D rendering. The perfect fusion of portability, performance, and versatility.',
     type: 'DIGITAL',
     categorySlug: 'smart-projectors',
-    basePrice: 499999, salePrice: 349999, sku: 'PB-SP-8KULTRA',
-    imageUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe7a?w=800&q=80',
-    features: ['Native 8K (7680×4320) resolution','5,000 ANSI lumens — full daylight','3-color laser (110% Rec.2020)','120" ALR screen included','Dolby Atmos 5.1.2 audio system','Wireless subwoofer included','Android TV 12 + Google TV','HDR10+ / Dolby Vision / HLG','Professional installation included','5-year premium warranty'],
+    basePrice: 29150, salePrice: null, sku: 'PB-MGC-HY300PROPLUS',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/S6002d940582649c9be0292811be6b4e5I.jpg',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/S6002d940582649c9be0292811be6b4e5I.jpg',
+    ],
+    features: [
+      '290 ANSI lumens brightness',
+      '180° flexible projection angle',
+      'Android 14.0 OS',
+      'Allwinner H723 Quad-core Cortex-A53 CPU',
+      'Mali-G31 GPU (OpenGL ES 3.2, OpenCL 2.0)',
+      'Native 1280x720P, supports 8K',
+      'Dual-band Wi-Fi 6 + Bluetooth 5.4',
+      '1-year warranty',
+    ],
     specifications: [
-      {label:'Resolution',value:'Native 8K (7680×4320)'},
-      {label:'Brightness',value:'5,000 ANSI lumens'},
-      {label:'Light Source',value:'3-color laser'},
-      {label:'Color Gamut',value:'110% Rec.2020'},
-      {label:'Screen',value:'120" ALR motorized'},
-      {label:'Audio',value:'Dolby Atmos 5.1.2 + wireless sub'},
-      {label:'OS',value:'Android TV 12 / Google TV'},
-      {label:'Throw Ratio',value:'0.22:1 UST'},
-      {label:'Installation',value:'Professional included'},
-      {label:'Warranty',value:'5 years premium'},
+      {label:'Native Resolution',value:'1280x720P'},
+      {label:'Max Decoding',value:'8K'},
+      {label:'Brightness',value:'290 ANSI lumens'},
+      {label:'Projection Angle',value:'180° flexible'},
+      {label:'OS',value:'Android 14.0'},
+      {label:'CPU',value:'Allwinner H723 Quad-core Cortex-A53'},
+      {label:'GPU',value:'Mali-G31 (OpenGL ES 3.2, OpenCL 2.0)'},
+      {label:'Wi-Fi',value:'Dual-band Wi-Fi 6'},
+      {label:'Bluetooth',value:'5.4'},
+      {label:'Warranty',value:'1 year'},
     ],
     faqs: [
-      {q:'Is professional installation included?',a:'Yes — our certified technician will install and calibrate the projector and screen at your location within 7 days of delivery.'},
-      {q:'Can I really use it in daylight?',a:'Yes — with 5,000 ANSI lumens and the included ALR screen, daytime viewing is comfortable even with windows open.'},
-      {q:'What\'s the difference between this and the Pro X1?',a:'The 8K Ultra has 2× resolution, 43% brighter output, motorized ALR screen, full Dolby Atmos audio system, and 5-year warranty vs 3-year on Pro X1.'},
+      {q:'What is the 180° projection angle?',a:'The HY300Pro Plus can rotate 180° on its base, allowing you to project on the ceiling, wall, or floor without repositioning the entire unit.'},
+      {q:'Can it handle 4K gaming?',a:'It supports 4K input via HDMI but natively renders at 720P. For best gaming experience, set your console to 1080p output.'},
     ],
-    tags: ['8k','laser','premium','home-cinema','dolby-atmos','flagship','projector'],
-    rating: 5.0, reviewsCount: 47, salesCount: 180, isFeatured: true, isBestSeller: false, isDeal: true,
+    tags: ['magcubic','hy300','pro-plus','projector','android','180-degree','8k'],
+    rating: 4.8, reviewsCount: 247, salesCount: 1380, isFeatured: true, isBestSeller: true, isDeal: true,
     dealEndsAt: new Date(Date.now() + 5*24*60*60*1000),
     deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
     variants: [
-      { name: '8K Projector + 120" Screen', durationDays: 0, price: 499999, salePrice: 349999, stock: 10 },
-      { name: '8K Projector + 150" Screen + Atmos', durationDays: 0, price: 599999, salePrice: 449999, stock: 5 },
+      { name: 'Single Unit', durationDays: 0, price: 29150, stock: 20 },
+      { name: 'With Tripod + Carry Case', durationDays: 0, price: 32999, stock: 10 },
     ],
     inventoryKeys: [
-      { key: 'PB-SP-8KULTRA-SN-0001', keyType: 'LICENSE' },
-      { key: 'PB-SP-8KULTRA-SN-0002', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PROPLUS-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY300PROPLUS-SN-0002', keyType: 'LICENSE' },
     ],
   },
   {
-    title: 'PlayBeat Smart Projector Stand & Tripod Kit',
-    slug: 'playbeat-projector-stand-kit',
-    shortDesc: 'Adjustable projector stand with height 0.8-1.5m, cable management, and 360° swivel mount.',
-    description: 'A premium aluminium-alloy projector stand with adjustable height from 0.8m to 1.5m, 360° swivel mount, integrated cable management system, and a sturdy 5kg load capacity. Includes a carrying bag and universal mounting plate compatible with all PlayBeat projectors and most third-party models.',
+    title: 'HT23 Projector',
+    slug: 'ht23-projector',
+    shortDesc: '2.69-inch LCD, 260 ANSI lumens, native 1280x720P, USB 2.0/HDMI/AUX, electric focus.',
+    description: 'The HT23 Projector features a 2.69-inch LCD panel with 260 ANSI lumens high-brightness output and native 1280x720P resolution. Equipped with electric focus, USB 2.0, HDMI, and AUX interfaces for versatile connectivity. The high transparency LCD delivers vivid colors and sharp images, making it perfect for home theater, gaming, and presentations. Compact design with built-in speaker and remote control.',
     type: 'DIGITAL',
     categorySlug: 'smart-projectors',
-    basePrice: 8999, salePrice: 1399720, sku: 'PB-SP-STAND',
-    imageUrl: 'https://images.unsplash.com/photo-1593784991095-a2055888d3f1?w=800&q=80',
-    features: ['Aluminium alloy construction','Adjustable height 0.8m - 1.5m','360° swivel mount','Integrated cable management','5kg load capacity','Universal mounting plate','Carrying bag included','Tool-free setup'],
+    basePrice: 29150, salePrice: null, sku: 'PB-MGC-HT23',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/preview_images/1_d88162d0-7eb3-4d29-b282-3c3163dbfc89.png',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/preview_images/1_d88162d0-7eb3-4d29-b282-3c3163dbfc89.png',
+    ],
+    features: [
+      '2.69-inch LCD panel',
+      '260 ANSI lumens high brightness',
+      'Native 1280x720P resolution',
+      'Electric focus mechanism',
+      'USB 2.0 + HDMI + AUX interfaces',
+      'Built-in speaker',
+      'Remote control included',
+      '1-year warranty',
+    ],
     specifications: [
-      {label:'Material',value:'Aluminium alloy'},
-      {label:'Height',value:'0.8m - 1.5m adjustable'},
-      {label:'Load Capacity',value:'5 kg'},
-      {label:'Mount Type',value:'Universal 1/4" screw'},
-      {label:'Weight',value:'2.1 kg'},
+      {label:'Light Source',value:'2.69-inch LCD'},
+      {label:'Brightness',value:'260 ANSI lumens'},
+      {label:'Native Resolution',value:'1280x720P'},
+      {label:'Focus',value:'Electric (motorized)'},
+      {label:'Interfaces',value:'USB 2.0, HDMI, AUX'},
+      {label:'Speaker',value:'Built-in'},
       {label:'Warranty',value:'1 year'},
     ],
-    faqs: [{q:'Will this fit my projector?',a:'Yes — the universal 1/4" screw mount fits all PlayBeat projectors and 95% of third-party models.'}],
-    tags: ['accessory','stand','tripod','mount','projector'],
-    rating: 4.6, reviewsCount: 89, salesCount: 540,
+    faqs: [
+      {q:'Is the focus manual or motorized?',a:'The HT23 has an electric (motorized) focus — adjust with the remote control without touching the lens.'},
+      {q:'Can I play movies from a USB drive?',a:'Yes — connect a USB drive to the USB 2.0 port and play media files directly. Supports MP4, MKV, AVI, and other common formats.'},
+    ],
+    tags: ['ht23','projector','lcd','electric-focus','720p','home-cinema'],
+    rating: 4.5, reviewsCount: 142, salesCount: 680, isFeatured: true,
     deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
     variants: [
-      { name: 'Standard Stand', durationDays: 0, price: 8999, salePrice: 1399720, stock: 80 },
-      { name: 'Premium Stand + Mount', durationDays: 0, price: 12999, salePrice: 7999, stock: 40 },
+      { name: 'Single Unit', durationDays: 0, price: 29150, stock: 22 },
+      { name: 'With Free HDMI Cable', durationDays: 0, price: 29999, stock: 15 },
     ],
-    inventoryKeys: [],
+    inventoryKeys: [
+      { key: 'PB-MGC-HT23-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HT23-SN-0002', keyType: 'LICENSE' },
+    ],
   },
   {
-    title: 'PlayBeat 100" ALR Projector Screen',
-    slug: 'playbeat-100-alr-screen',
-    shortDesc: '100-inch ambient light rejecting motorized screen with 4K/8K support and 0.6 gain.',
-    description: 'A premium 100-inch ALR (Ambient Light Rejecting) projector screen with motorized retractable mechanism, 4K/8K optimized surface, 0.6 gain, and 160° viewing angle. Perfect for ultra short throw projectors. Wall or ceiling mountable with included bracket.',
+    title: 'HCS350PRO Projector',
+    slug: 'hcs350pro-projector',
+    shortDesc: 'Native 1280x720P (max 1080P/2K/4K decode), Wi-Fi 6, Android 11, 1GB RAM, 8GB ROM.',
+    description: 'The HCS350PRO Projector delivers native 1280x720P resolution with support for 1080P, 2K, and 4K HD signal decoding. Powered by Android 11.0 with 1GB RAM and 8GB ROM, dual-band Wi-Fi 6 (2.4G + 5G), and a powerful quad-core CPU. Premium white finish with sleek modern design. Perfect for streaming Netflix, YouTube, Prime Video, and Disney+ directly without external devices. Includes remote control, HDMI input, and built-in speaker.',
     type: 'DIGITAL',
     categorySlug: 'smart-projectors',
-    basePrice: 49999, salePrice: 29999, sku: 'PB-SP-SCREEN100',
-    imageUrl: 'https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=800&q=80',
-    features: ['100-inch diagonal','ALR (Ambient Light Rejecting) surface','Motorized retractable','4K/8K optimized','0.6 gain, 160° viewing angle','UST compatible','Wall/ceiling mountable','RF remote included'],
-    specifications: [
-      {label:'Size',value:'100" diagonal (16:9)'},
-      {label:'Type',value:'ALR motorized retractable'},
-      {label:'Gain',value:'0.6'},
-      {label:'Viewing Angle',value:'160°'},
-      {label:'Resolution Support',value:'4K/8K UHD'},
-      {label:'UST Compatible',value:'Yes'},
-      {label:'Warranty',value:'3 years'},
+    basePrice: 37950, salePrice: null, sku: 'PB-MGC-HCS350PRO',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/HCS350_PRO_WHITE.png',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/HCS350_PRO_WHITE.png',
+      'https://www.zerobyte.store/cdn/shop/files/HCS350_PRO_BLACK.jpg',
     ],
-    faqs: [{q:'Will this work with non-PlayBeat projectors?',a:'Yes — the screen is universal and works with any UST or standard throw projector supporting 4K/8K.'}],
-    tags: ['screen','alr','100-inch','motorized','accessory','projector'],
-    rating: 4.8, reviewsCount: 142, salesCount: 720, isFeatured: true,
+    features: [
+      'Native 1280x720P, max 1080P/2K/4K decoding',
+      'Android 11.0 operating system',
+      'Dual Wi-Fi 6 (2.4G + 5G)',
+      '1GB RAM + 8GB ROM',
+      'Quad-core CPU',
+      'Premium white finish',
+      'Built-in speaker + remote control',
+      '1-year warranty',
+    ],
+    specifications: [
+      {label:'Native Resolution',value:'1280x720P'},
+      {label:'Max Decode',value:'4K via HD signal'},
+      {label:'OS',value:'Android 11.0'},
+      {label:'RAM',value:'1GB'},
+      {label:'ROM',value:'8GB'},
+      {label:'Wi-Fi',value:'Dual 2.4G + 5G Wi-Fi 6'},
+      {label:'CPU',value:'Quad-core'},
+      {label:'Warranty',value:'1 year'},
+    ],
+    faqs: [
+      {q:"What's the difference between HCS350PRO and HY300 series?",a:'The HCS350PRO has a more powerful CPU, larger ROM (8GB vs typical 4GB), and premium white chassis. It also supports Wi-Fi 6 for faster streaming.'},
+      {q:'Can I install apps from Play Store?',a:'Yes — Android 11.0 gives full access to Google Play Store for installing Netflix, YouTube, Disney+, Kodi, and more.'},
+    ],
+    tags: ['hcs350','pro','projector','android','wifi6','4k','magcubic'],
+    rating: 4.7, reviewsCount: 198, salesCount: 870, isFeatured: true, isBestSeller: true, isDeal: true,
+    dealEndsAt: new Date(Date.now() + 3*24*60*60*1000),
     deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
     variants: [
-      { name: '100" ALR Screen', durationDays: 0, price: 49999, salePrice: 29999, stock: 30 },
-      { name: '120" ALR Screen', durationDays: 0, price: 69999, salePrice: 44999, stock: 20 },
-      { name: '150" ALR Screen', durationDays: 0, price: 99999, salePrice: 69999, stock: 10 },
+      { name: 'Single Unit (White)', durationDays: 0, price: 37950, stock: 18 },
+      { name: 'Single Unit (Black)', durationDays: 0, price: 37950, stock: 12 },
+      { name: 'Bundle with 100" Screen', durationDays: 0, price: 49999, stock: 6 },
     ],
-    inventoryKeys: [],
+    inventoryKeys: [
+      { key: 'PB-MGC-HCS350PRO-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HCS350PRO-SN-0002', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HCS350PRO-SN-0003', keyType: 'LICENSE' },
+    ],
+  },
+  {
+    title: 'HM103-A Projector',
+    slug: 'hm103-a-projector',
+    shortDesc: 'Native 1080P (Full HD 1920x1080), 4K decode, T950S Cortex-A53, 2GB RAM, 16GB ROM, 300 ANSI.',
+    description: 'The HM103-A Projector is a true Full HD powerhouse with native 1920x1080 resolution and 4K decoding support. Powered by the T950S Cortex-A53 CPU with Mali-450 MP2 GPU, 2GB RAM, and 16GB ROM — significantly more powerful than entry-level projectors. With 300 ANSI lumens brightness and LCD technology, it delivers crisp, bright images even in moderately lit rooms. Perfect for serious home cinema enthusiasts who demand native 1080p quality without compromising on smart features.',
+    type: 'DIGITAL',
+    categorySlug: 'smart-projectors',
+    basePrice: 42900, salePrice: null, sku: 'PB-MGC-HM103A',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/preview_images/WHITE.png',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/preview_images/WHITE.png',
+    ],
+    features: [
+      'Native Full HD 1920x1080 (true 1080p)',
+      '4K decoding support',
+      'T950S Cortex-A53 CPU',
+      'Mali-450 MP2 GPU',
+      '2GB RAM + 16GB ROM',
+      '300 ANSI lumens brightness',
+      'LCD display technology',
+      '1-year warranty',
+    ],
+    specifications: [
+      {label:'Native Resolution',value:'1920x1080 (Full HD)'},
+      {label:'Max Decode',value:'4K'},
+      {label:'Brightness',value:'300 ANSI lumens'},
+      {label:'CPU',value:'T950S Cortex-A53'},
+      {label:'GPU',value:'Mali-450 MP2'},
+      {label:'RAM',value:'2GB'},
+      {label:'ROM',value:'16GB'},
+      {label:'Technology',value:'LCD'},
+      {label:'Warranty',value:'1 year'},
+    ],
+    faqs: [
+      {q:'Why is the HM103-A more expensive?',a:'It has native 1080p resolution (vs 720p on most projectors in this range), more RAM (2GB), more storage (16GB), and a brighter 300 ANSI output. The hardware is significantly more powerful.'},
+      {q:'Is it good for gaming?',a:'Yes — the native 1080p resolution and 300 ANSI brightness make it ideal for PS5, Xbox Series X, and PC gaming. Input lag is acceptable for casual gaming.'},
+    ],
+    tags: ['hm103','projector','1080p','native-fhd','4k','magcubic','premium'],
+    rating: 4.9, reviewsCount: 89, salesCount: 410, isFeatured: true, isBestSeller: true, isTrending: true,
+    deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
+    variants: [
+      { name: 'Single Unit (White)', durationDays: 0, price: 42900, stock: 15 },
+      { name: 'With Soundbar Bundle', durationDays: 0, price: 49999, stock: 8 },
+    ],
+    inventoryKeys: [
+      { key: 'PB-MGC-HM103A-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HM103A-SN-0002', keyType: 'LICENSE' },
+    ],
+  },
+  {
+    title: 'HY7 Built-in Battery Projector',
+    slug: 'hy7-battery-projector',
+    shortDesc: 'Native 1280x720 (720p HD), up to 1080p/4K decoding, 180-280 ANSI lumens, built-in battery.',
+    description: 'The HY7 Projector is the ultimate portable entertainment solution with a built-in rechargeable battery — no need for a power outlet during outdoor movie nights! Featuring native 1280x720 (720p HD) resolution with support for up to 1080p and 4K decoding, 180-280 ANSI lumens brightness, and a 400:1 to 6000:1 contrast ratio. The internal battery provides hours of playback on a single charge, making it perfect for camping, backyard cinema, presentations, and travel.',
+    type: 'DIGITAL',
+    categorySlug: 'smart-projectors',
+    basePrice: 48950, salePrice: null, sku: 'PB-MGC-HY7',
+    imageUrl: 'https://www.zerobyte.store/cdn/shop/files/S9b7d3e654ba04d26b500c9268f4fa0008.webp',
+    galleryUrls: [
+      'https://www.zerobyte.store/cdn/shop/files/S9b7d3e654ba04d26b500c9268f4fa0008.webp',
+      'https://ae01.alicdn.com/kf/S10e9a3bd1fe949e78d10ca3280dc7a5aN.jpg',
+      'https://ae01.alicdn.com/kf/S1625b59c9ec942c39982eaf4bc9d1da2c.jpg',
+      'https://ae01.alicdn.com/kf/S330c317bafbe459b8ff72baf45cd1ef4a.jpg',
+    ],
+    features: [
+      'Native 1280x720 (720p HD)',
+      'Up to 1080p / 4K decoding',
+      '180-280 ANSI lumens brightness',
+      '400:1 to 6000:1 contrast ratio',
+      'Built-in rechargeable battery',
+      'Portable design — perfect for outdoor use',
+      'Wi-Fi + Bluetooth connectivity',
+      '1-year warranty',
+    ],
+    specifications: [
+      {label:'Native Resolution',value:'1280x720 (720p HD)'},
+      {label:'Supported',value:'Up to 1080p / 4K decoding'},
+      {label:'Brightness',value:'180-280 ANSI lumens'},
+      {label:'Contrast Ratio',value:'400:1 to 6000:1'},
+      {label:'Battery',value:'Built-in rechargeable'},
+      {label:'Portability',value:'Outdoor-ready design'},
+      {label:'Warranty',value:'1 year'},
+    ],
+    faqs: [
+      {q:'How long does the battery last?',a:'The built-in battery provides up to 2 hours of continuous playback — enough for a full movie or gaming session outdoors.'},
+      {q:'Is it good for daytime use?',a:'With 180-280 ANSI lumens, the HY7 is best for dim/dark environments. For daytime outdoor use, we recommend the HCS350PRO or HM103-A which have higher brightness.'},
+      {q:'Can I charge it via power bank?',a:'Yes — the HY7 supports charging via USB-C power bank (5V/2A minimum) for extended outdoor use.'},
+    ],
+    tags: ['hy7','projector','portable','battery','outdoor','magcubic','720p'],
+    rating: 4.6, reviewsCount: 234, salesCount: 1120, isFeatured: true, isTrending: true, isDeal: true,
+    dealEndsAt: new Date(Date.now() + 7*24*60*60*1000),
+    deliveryMethod: 'MANUAL', licenseType: 'PHYSICAL_PRODUCT',
+    variants: [
+      { name: 'Single Unit', durationDays: 0, price: 48950, stock: 12 },
+      { name: 'With Carry Bag + Tripod', durationDays: 0, price: 52999, stock: 6 },
+      { name: 'With 80" Outdoor Screen', durationDays: 0, price: 57999, stock: 4 },
+    ],
+    inventoryKeys: [
+      { key: 'PB-MGC-HY7-SN-0001', keyType: 'LICENSE' },
+      { key: 'PB-MGC-HY7-SN-0002', keyType: 'LICENSE' },
+    ],
   },
 
   // ===== WEB3 =====
@@ -956,61 +1128,65 @@ async function seed() {
   // 1. Categories
   console.log('  → Categories')
   for (const cat of CATEGORIES) {
-    await db.category.upsert({
-      where: { slug: cat.slug },
-      create: cat,
-      update: cat,
-    })
+    const existing = await db.category.findUnique({ where: { slug: cat.slug } })
+    if (existing) {
+      await db.category.update({ where: { slug: cat.slug }, data: cat })
+    } else {
+      await db.category.create({ data: cat })
+    }
   }
 
   // 2. Admin user
   console.log('  → Admin user')
   const adminEmail = 'admin@playbeat.digital'
   const adminPw = await bcrypt.hash('playbeat1122', SALT_ROUNDS)
-  await db.user.upsert({
-    where: { email: adminEmail },
-    create: { email: adminEmail, name: 'PlayBeat Admin', passwordHash: adminPw, role: 'SUPER_ADMIN', status: 'ACTIVE', walletBalance: 0 },
-    update: { passwordHash: adminPw, role: 'SUPER_ADMIN' },
-  })
+  const adminExisting = await db.user.findUnique({ where: { email: adminEmail } })
+  if (adminExisting) {
+    await db.user.update({ where: { email: adminEmail }, data: { passwordHash: adminPw, role: 'SUPER_ADMIN' } })
+  } else {
+    await db.user.create({ data: { email: adminEmail, name: 'PlayBeat Admin', passwordHash: adminPw, role: 'SUPER_ADMIN', status: 'ACTIVE', walletBalance: 0 } })
+  }
 
   // 3. Demo customer
   const custEmail = 'customer@playbeat.digital'
   const custPw = await bcrypt.hash('customer123', SALT_ROUNDS)
-  await db.user.upsert({
-    where: { email: custEmail },
-    create: { email: custEmail, name: 'Demo Customer', passwordHash: custPw, role: 'CUSTOMER', status: 'ACTIVE', walletBalance: 5000 },
-    update: {},
-  })
+  const custExisting = await db.user.findUnique({ where: { email: custEmail } })
+  if (custExisting) {
+    // skip — keep existing customer data
+  } else {
+    await db.user.create({ data: { email: custEmail, name: 'Demo Customer', passwordHash: custPw, role: 'CUSTOMER', status: 'ACTIVE', walletBalance: 5000 } })
+  }
 
   // 4. Products
   console.log('  → Products')
   for (const p of PRODUCTS) {
     const { variants, inventoryKeys, ...productData } = p
-    const created = await db.product.upsert({
-      where: { slug: p.slug },
-      create: {
-        ...productData,
-        galleryUrls: JSON.stringify(p.galleryUrls || []),
-        features: JSON.stringify(p.features || []),
-        specifications: JSON.stringify(p.specifications || []),
-        faqs: JSON.stringify(p.faqs || []),
-        tags: JSON.stringify(p.tags || []),
-      } as any,
-      update: {} as any,
-      include: { variants: true, inventory: true },
-    })
-
-    // Variants
-    if (variants && variants.length > 0 && created.variants.length === 0) {
-      for (const v of variants) {
-        await db.productVariant.create({ data: { ...v, productId: created.id } })
-      }
+    const existing = await db.product.findUnique({ where: { slug: p.slug }, include: { variants: true, inventory: true } })
+    const createData: any = {
+      ...productData,
+      galleryUrls: JSON.stringify(p.galleryUrls || []),
+      features: JSON.stringify(p.features || []),
+      specifications: JSON.stringify(p.specifications || []),
+      faqs: JSON.stringify(p.faqs || []),
+      tags: JSON.stringify(p.tags || []),
     }
-
-    // Inventory keys
-    if (inventoryKeys && inventoryKeys.length > 0 && created.inventory.length === 0) {
-      for (const k of inventoryKeys) {
-        await db.inventoryKey.create({ data: { ...k, productId: created.id } })
+    let productId: string
+    if (existing) {
+      await db.product.update({ where: { slug: p.slug }, data: createData })
+      productId = existing.id
+    } else {
+      const created = await db.product.create({ data: createData })
+      productId = created.id
+      // Add variants and inventory keys for new products
+      if (variants && variants.length > 0) {
+        for (const v of variants) {
+          await db.productVariant.create({ data: { ...v, productId } })
+        }
+      }
+      if (inventoryKeys && inventoryKeys.length > 0) {
+        for (const k of inventoryKeys) {
+          await db.inventoryKey.create({ data: { ...k, productId } })
+        }
       }
     }
   }
@@ -1018,31 +1194,30 @@ async function seed() {
   // 5. Coupons
   console.log('  → Coupons')
   for (const c of COUPONS) {
-    await db.coupon.upsert({
-      where: { code: c.code },
-      create: c as any,
-      update: {} as any,
-    })
+    const existing = await db.coupon.findUnique({ where: { code: c.code } })
+    if (!existing) {
+      await db.coupon.create({ data: c as any })
+    }
   }
 
   // 6. Settings
   console.log('  → Settings')
   for (const s of SETTINGS) {
-    await db.setting.upsert({
-      where: { key: s.key },
-      create: s,
-      update: { value: s.value },
-    })
+    const existing = await db.setting.findUnique({ where: { key: s.key } })
+    if (existing) {
+      await db.setting.update({ where: { key: s.key }, data: { value: s.value } })
+    } else {
+      await db.setting.create({ data: s })
+    }
   }
 
   // 7. CMS Sections
   console.log('  → CMS Sections')
   for (const sec of CMS_SECTIONS) {
-    await db.cMSSection.upsert({
-      where: { sectionKey: sec.sectionKey },
-      create: sec as any,
-      update: {} as any,
-    })
+    const existing = await db.cMSSection.findUnique({ where: { sectionKey: sec.sectionKey } })
+    if (!existing) {
+      await db.cMSSection.create({ data: sec as any })
+    }
   }
 
   console.log('✅ Seed complete!')

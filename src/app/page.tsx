@@ -9,6 +9,7 @@ import {
   BestSellersSection, RecentSection, TrustSection, CatalogGrid,
 } from '@/components/storefront/sections'
 import { Footer, CategoryFilterBar } from '@/components/storefront/footer'
+import { WhatsAppButton } from '@/components/storefront/whatsapp-button'
 import { AdminConsole } from '@/components/admin/console'
 import {
   ProductDetailModal, CartDrawer, CheckoutModal, AuthModal, WishlistModal,
@@ -63,6 +64,7 @@ export default function Home() {
         <SearchModal />
         <SupportModal />
         <AccountModal />
+        <WhatsAppButton />
       </>
     )
   }
@@ -107,6 +109,9 @@ export default function Home() {
       <SearchModal />
       <SupportModal />
       <AccountModal />
+
+      {/* Floating WhatsApp button */}
+      <WhatsAppButton />
     </div>
   )
 }

@@ -20,7 +20,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden gradient-hero text-white">
+    <section className="relative overflow-hidden gradient-hero-premium text-white">
       {/* Animated background */}
       <div className="absolute inset-0 opacity-30 animate-gradient-shift" style={{
         background: 'radial-gradient(circle at 20% 30%, oklch(0.88 0.15 95 / 0.5) 0%, transparent 50%), radial-gradient(circle at 80% 70%, oklch(0.65 0.13 230 / 0.4) 0%, transparent 50%)',

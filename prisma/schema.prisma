@@ -4,13 +4,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 // ----------------- AUTH & RBAC -----------------
 model User {
-  id            String   @id @default(cuid())
+  id            String   @id @default(cuid()) @map("_id")
   email         String   @unique
   name          String
   passwordHash  String
@@ -38,7 +38,7 @@ model User {
 }
 
 model Role {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid()) @map("_id")
   name        String   @unique
   description String?
   permissions Json     @default("[]")
@@ -46,7 +46,7 @@ model Role {
 }
 
 model LoginActivity {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   userId    String
   ip        String?
   userAgent String?
@@ -56,7 +56,7 @@ model LoginActivity {
 }
 
 model Address {
-  id        String  @id @default(cuid())
+  id        String  @id @default(cuid()) @map("_id")
   userId    String
   label     String?
   line1     String
@@ -71,7 +71,7 @@ model Address {
 
 // ----------------- CATALOG -----------------
 model Category {
-  id          String      @id @default(cuid())
+  id          String      @id @default(cuid()) @map("_id")
   name        String
   slug        String      @unique
   description String?
@@ -85,12 +85,12 @@ model Category {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   products    Product[]
-  parent      Category?   @relation("CategoryTree", fields: [parentId], references: [id])
+  parent      Category?   @relation("CategoryTree", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children    Category[]  @relation("CategoryTree")
 }
 
 model Product {
-  id              String           @id @default(cuid())
+  id              String           @id @default(cuid()) @map("_id")
   title           String
   slug            String           @unique
   shortDesc       String?
@@ -134,7 +134,7 @@ model Product {
 }
 
 model ProductVariant {
-  id              String    @id @default(cuid())
+  id              String    @id @default(cuid()) @map("_id")
   productId      String
   name           String    // "1 Month", "3 Months", "Lifetime"
   durationDays   Int       @default(30)
@@ -149,7 +149,7 @@ model ProductVariant {
 }
 
 model InventoryKey {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid()) @map("_id")
   productId   String
   variantId   String?
   key         String   // license key, account creds, download URL, M3U URL, etc.
@@ -163,7 +163,7 @@ model InventoryKey {
 }
 
 model InventoryAuditLog {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid()) @map("_id")
   productId   String?
   variantId   String?
   action      String   // CREATE | UPDATE | DELETE | RESERVE | RELEASE | USE
@@ -177,7 +177,7 @@ model InventoryAuditLog {
 
 // ----------------- CART & ORDERS -----------------
 model Cart {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   userId    String   @unique
   items     String   @default("[]") // JSON array of {productId, variantId, qty, price}
   couponId  String?
@@ -186,7 +186,7 @@ model Cart {
 }
 
 model Order {
-  id              String       @id @default(cuid())
+  id              String       @id @default(cuid()) @map("_id")
   orderNumber     String       @unique
   customerId      String
   customerEmail   String
@@ -213,7 +213,7 @@ model Order {
 }
 
 model OrderItem {
-  id          String  @id @default(cuid())
+  id          String  @id @default(cuid()) @map("_id")
   orderId     String
   productId   String
   variantId   String?
@@ -228,7 +228,7 @@ model OrderItem {
 }
 
 model Payment {
-  id            String   @id @default(cuid())
+  id            String   @id @default(cuid()) @map("_id")
   orderId       String
   provider      String   // STRIPE | JAZZCASH | EASYPAYSA | BANK | WALLET
   amount        Float
@@ -241,7 +241,7 @@ model Payment {
 
 // ----------------- SUBSCRIPTIONS -----------------
 model Subscription {
-  id          String    @id @default(cuid())
+  id          String    @id @default(cuid()) @map("_id")
   customerId  String
   productId   String
   variantId   String?
@@ -258,7 +258,7 @@ model Subscription {
 
 // ----------------- PROMOTIONS -----------------
 model Coupon {
-  id            String   @id @default(cuid())
+  id            String   @id @default(cuid()) @map("_id")
   code          String   @unique
   description   String?
   type          String   @default("PERCENTAGE") // PERCENTAGE | FIXED | PRODUCT | CATEGORY | FIRST_ORDER
@@ -277,7 +277,7 @@ model Coupon {
 
 // ----------------- SOCIAL & ENGAGEMENT -----------------
 model Review {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   productId String
   userId    String
   rating    Int
@@ -290,7 +290,7 @@ model Review {
 }
 
 model Wishlist {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   userId    String
   productId String
   createdAt DateTime @default(now())
@@ -299,7 +299,7 @@ model Wishlist {
 }
 
 model SupportTicket {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid()) @map("_id")
   ticketNo    String   @unique
   customerId  String
   subject     String
@@ -314,7 +314,7 @@ model SupportTicket {
 }
 
 model Notification {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   userId    String
   type      String   // ORDER | PAYMENT | SUBSCRIPTION | SUPPORT | PROMO | SYSTEM
   title     String
@@ -327,7 +327,7 @@ model Notification {
 
 // ----------------- CMS & SETTINGS -----------------
 model CMSSection {
-  id            String   @id @default(cuid())
+  id            String   @id @default(cuid()) @map("_id")
   sectionKey    String   @unique // HERO | TRENDING | DEALS | BEST_SELLERS | RECENT | TRUST | CATEGORIES
   title         String
   subtitle      String?
@@ -341,7 +341,7 @@ model CMSSection {
 }
 
 model Banner {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   title     String
   imageUrl  String
   linkUrl   String?
@@ -354,14 +354,14 @@ model Banner {
 }
 
 model Setting {
-  id    String @id @default(cuid())
+  id    String @id @default(cuid()) @map("_id")
   key   String @unique
   value String @default("")
   group String @default("GENERAL") // GENERAL | STORE | PAYMENTS | EMAIL | SECURITY | SEO | SOCIAL
 }
 
 model AuditLog {
-  id         String   @id @default(cuid())
+  id         String   @id @default(cuid()) @map("_id")
   actorEmail String
   actorId    String?
   action     String

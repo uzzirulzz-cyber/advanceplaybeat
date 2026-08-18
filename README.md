@@ -10,12 +10,12 @@ bun install
 
 # Set up environment variables
 cp .env.example .env
-# Edit .env to add your DATABASE_URL, JWT_SECRET, etc.
+# Edit .env to add your DATABASE_URL (MongoDB Atlas) and JWT_SECRET
 
-# Push database schema
+# Push database schema (MongoDB)
 bun run db:push
 
-# Seed the database (creates admin, 31 products across 10 categories, coupons, settings, CMS)
+# Seed the database (creates admin, 33 products across 10 categories, coupons, settings, CMS)
 bun run scripts/seed.ts
 
 # Start development server
@@ -51,11 +51,25 @@ The platform includes 10 product categories:
 3. **Gift Cards** — Steam, Google Play, iTunes, Amazon
 4. **Streaming** — Netflix, Spotify, Disney+, YouTube
 5. **IPTV** — Premium + Sports packages
-6. **Smart Projectors** — 4K UHD, 8K, portable, accessories
+6. **Smart Projectors** — 7 real Magcubic projectors (HY300 PRO, HY300 Plus, HY300Pro Plus, HT23, HCS350PRO, HM103-A, HY7) with real product images from zerobyte.store
 7. **Web3** — Crypto wallets, NFT contracts
 8. **Services** — Logo design, WordPress dev
 9. **Subscriptions** — ChatGPT Plus, Notion
 10. **Digital Downloads** — Lightroom presets, AE templates
+
+## 📽️ Smart Projectors (Real Products)
+
+| Product | Selling Price (PKR) | Source |
+|---------|---------------------|--------|
+| Magcubic HY300 PRO | Rs 24,750 | zerobyte.store |
+| HY300 Plus Projector | Rs 24,750 | zerobyte.store |
+| Magcubic HY300Pro Plus | Rs 29,150 | zerobyte.store |
+| HT23 Projector | Rs 29,150 | zerobyte.store |
+| HCS350PRO Projector | Rs 37,950 | zerobyte.store |
+| HM103-A Projector | Rs 42,900 | zerobyte.store |
+| HY7 Built-in Battery Projector | Rs 48,950 | zerobyte.store |
+
+All product images are fetched directly from zerobyte.store product pages.
 
 ## 🏪 Storefront Features
 
@@ -87,11 +101,12 @@ The platform includes 10 product categories:
 ## 🏗 Tech Stack
 
 - **Framework**: Next.js 16 (App Router) + TypeScript 5
-- **Database**: Prisma ORM + SQLite (production: switch to MongoDB/PostgreSQL)
+- **Database**: MongoDB Atlas (via Prisma ORM) — production-ready
 - **UI**: Tailwind CSS 4 + shadcn/ui + Lucide icons
 - **State**: Zustand (cart/wishlist/theme/auth/view) with localStorage persistence
 - **Auth**: JWT in HTTP-only cookies + bcrypt password hashing + RBAC
 - **Payments**: Modular provider architecture (Stripe, JazzCash, Easypaisa, Bank, Wallet)
+- **WhatsApp**: Floating chat button (+92 332 1029333)
 - **Toasts**: Sonner
 
 ## 📁 Project Structure

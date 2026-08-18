@@ -50,18 +50,26 @@ export function Header() {
 
   return (
     <>
-      {/* Top announcement bar */}
-      <div className="gradient-navy text-white text-xs py-1.5 px-4 text-center font-medium">
-        🎉 Launch Sale: Use code <span className="font-bold text-yellow">PLAYBEAT50</span> for 50% off your first order • Free instant delivery worldwide
+      {/* Top announcement bar — premium */}
+      <div className="gradient-navy text-white text-xs py-2 px-4 text-center font-medium relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 animate-gradient-shift" style={{ background: 'linear-gradient(90deg, transparent 0%, oklch(0.92 0.13 95 / 0.4) 50%, transparent 100%)' }} />
+        <div className="relative flex items-center justify-center gap-3 flex-wrap">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            🎉 Launch Sale — Use code <span className="font-bold text-yellow bg-yellow/15 px-1.5 py-0.5 rounded">PLAYBEAT50</span> for 50% off your first order
+          </span>
+          <span className="hidden sm:inline text-white/40">•</span>
+          <span className="hidden sm:inline">Free instant delivery worldwide</span>
+        </div>
       </div>
 
-      <header className={cn('sticky top-0 z-40 transition-all duration-300', scrolled ? 'glass shadow-sm' : 'bg-background')}>
+      <header className={cn('sticky top-0 z-40 transition-all duration-300', scrolled ? 'glass shadow-premium' : 'bg-background')}>
         <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between h-16 gap-4">
-            {/* Logo */}
-            <button onClick={() => setView('storefront')} className="flex items-center gap-2 shrink-0">
-              <div className="w-9 h-9 rounded-lg gradient-navy flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 gradient-yellow opacity-30" />
+            {/* Logo — premium with gradient ring */}
+            <button onClick={() => setView('storefront')} className="flex items-center gap-2 shrink-0 group">
+              <div className="w-10 h-10 rounded-xl gradient-navy flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="absolute inset-0 gradient-yellow opacity-30 group-hover:opacity-50 transition-opacity" />
                 <Zap className="w-5 h-5 text-yellow relative z-10" fill="currentColor" />
               </div>
               <div className="flex flex-col leading-none">
