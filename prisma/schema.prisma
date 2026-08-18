@@ -1,0 +1,376 @@
+// PlayBeat Digital — Full Commerce Schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------- AUTH & RBAC -----------------
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  passwordHash  String
+  avatarUrl     String?
+  role          String   @default("CUSTOMER") // CUSTOMER | ADMIN | SUPER_ADMIN | MANAGER | SUPPORT | CONTENT | FINANCE
+  status        String   @default("ACTIVE") // ACTIVE | SUSPENDED | PENDING
+  walletBalance Float    @default(0)
+  currency      String   @default("USD")
+  timezone      String   @default("UTC")
+  lastLoginAt   DateTime?
+  lastLoginIp   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orders          Order[]
+  reviews         Review[]
+  wishlist        Wishlist[]
+  supportTickets  SupportTicket[]
+  notifications   Notification[]
+  auditLogs       AuditLog[]
+  subscriptions   Subscription[]
+  cart            Cart?
+  addresses       Address[]
+  loginActivities LoginActivity[]
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  permissions Json     @default("[]")
+  createdAt   DateTime @default(now())
+}
+
+model LoginActivity {
+  id        String   @id @default(cuid())
+  userId    String
+  ip        String?
+  userAgent String?
+  success   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  label     String?
+  line1     String
+  line2     String?
+  city      String
+  state     String?
+  postal    String?
+  country   String  @default("Pakistan")
+  isDefault Boolean @default(false)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ----------------- CATALOG -----------------
+model Category {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  description String?
+  imageUrl    String?
+  bannerUrl   String?
+  parentId    String?
+  sortOrder   Int         @default(0)
+  isFeatured  Boolean      @default(false)
+  seoTitle    String?
+  seoDesc     String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  products    Product[]
+  parent      Category?   @relation("CategoryTree", fields: [parentId], references: [id])
+  children    Category[]  @relation("CategoryTree")
+}
+
+model Product {
+  id              String           @id @default(cuid())
+  title           String
+  slug            String           @unique
+  shortDesc       String?
+  description     String
+  type            String           @default("DIGITAL") // DIGITAL | SUBSCRIPTION | SERVICE | DOWNLOAD
+  categorySlug    String
+  basePrice       Float
+  salePrice       Float?
+  currency        String           @default("USD")
+  sku             String?
+  imageUrl        String
+  galleryUrls     String           @default("[]") // JSON array
+  features        String           @default("[]") // JSON array
+  specifications  String           @default("[]") // JSON array of {label, value}
+  faqs            String           @default("[]") // JSON array of {q, a}
+  tags            String           @default("[]")
+  rating          Float            @default(0)
+  reviewsCount    Int              @default(0)
+  salesCount      Int              @default(0)
+  isFeatured      Boolean          @default(false)
+  isTrending      Boolean          @default(false)
+  isBestSeller    Boolean          @default(false)
+  isDeal          Boolean          @default(false)
+  dealEndsAt      DateTime?
+  status          String           @default("PUBLISHED") // DRAFT | PUBLISHED | ARCHIVED | SCHEDULED
+  publishAt       DateTime?
+  deliveryMethod  String           @default("INSTANT") // INSTANT | MANUAL | SCHEDULED
+  licenseType     String?
+  isVisible       Boolean          @default(true)
+  seoTitle        String?
+  seoDesc         String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  category        Category         @relation(fields: [categorySlug], references: [slug])
+  variants        ProductVariant[]
+  inventory       InventoryKey[]
+  reviews         Review[]
+  orderItems      OrderItem[]
+  wishlist        Wishlist[]
+  subscriptions   Subscription[]
+}
+
+model ProductVariant {
+  id              String    @id @default(cuid())
+  productId      String
+  name           String    // "1 Month", "3 Months", "Lifetime"
+  durationDays   Int       @default(30)
+  price          Float
+  salePrice      Float?
+  sku            String?
+  stock          Int       @default(0)
+  reserved       Int       @default(0)
+  deliveryInfo   String?
+  createdAt      DateTime  @default(now())
+  product        Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model InventoryKey {
+  id          String   @id @default(cuid())
+  productId   String
+  variantId   String?
+  key         String   // license key, account creds, download URL, M3U URL, etc.
+  keyType     String   @default("LICENSE") // LICENSE | ACCOUNT | DOWNLOAD | M3U | CREDENTIAL
+  status      String   @default("AVAILABLE") // AVAILABLE | RESERVED | USED | EXPIRED
+  note        String?
+  createdAt   DateTime @default(now())
+  usedAt      DateTime?
+  orderId     String?
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model InventoryAuditLog {
+  id          String   @id @default(cuid())
+  productId   String?
+  variantId   String?
+  action      String   // CREATE | UPDATE | DELETE | RESERVE | RELEASE | USE
+  field       String?
+  oldValue    String?
+  newValue    String?
+  reason      String?
+  adminEmail  String?
+  createdAt   DateTime @default(now())
+}
+
+// ----------------- CART & ORDERS -----------------
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  items     String   @default("[]") // JSON array of {productId, variantId, qty, price}
+  couponId  String?
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id              String       @id @default(cuid())
+  orderNumber     String       @unique
+  customerId      String
+  customerEmail   String
+  customerName    String
+  items           OrderItem[]
+  subtotal        Float
+  discount        Float        @default(0)
+  tax             Float        @default(0)
+  shipping        Float        @default(0)
+  total           Float
+  currency        String       @default("USD")
+  paymentMethod   String       @default("STRIPE") // STRIPE | JAZZCASH | EASYPAYSA | BANK | WALLET
+  paymentStatus   String       @default("PENDING") // PENDING | PAID | FAILED | REFUNDED
+  fulfillmentStatus String     @default("PENDING") // PENDING | PROCESSING | FULFILLED | COMPLETED | CANCELLED
+  transactionId   String?
+  couponCode      String?
+  status          String       @default("PENDING") // PENDING | PAID | PROCESSING | FULFILLED | COMPLETED | CANCELLED | REFUNDED | FAILED
+  ipAddress       String?
+  notes           String?
+  billingAddress  String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  customer        User         @relation(fields: [customerId], references: [id])
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  productId   String
+  variantId   String?
+  title       String
+  variantName String?
+  price       Float
+  qty         Int     @default(1)
+  deliveredKey String? // delivered license/account/download (masked in API responses)
+  deliveryStatus String @default("PENDING")
+  product     Product @relation(fields: [productId], references: [id])
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id            String   @id @default(cuid())
+  orderId       String
+  provider      String   // STRIPE | JAZZCASH | EASYPAYSA | BANK | WALLET
+  amount        Float
+  currency      String   @default("USD")
+  status        String   @default("PENDING") // PENDING | SUCCESS | FAILED | REFUNDED
+  transactionId String?
+  rawPayload    String?
+  createdAt     DateTime @default(now())
+}
+
+// ----------------- SUBSCRIPTIONS -----------------
+model Subscription {
+  id          String    @id @default(cuid())
+  customerId  String
+  productId   String
+  variantId   String?
+  status      String    @default("ACTIVE") // ACTIVE | TRIAL | EXPIRING | EXPIRED | CANCELLED | FAILED
+  startDate   DateTime  @default(now())
+  endDate     DateTime
+  autoRenew   Boolean   @default(true)
+  trialEndsAt DateTime?
+  cancelledAt DateTime?
+  createdAt    DateTime  @default(now())
+  customer    User      @relation(fields: [customerId], references: [id])
+  product     Product   @relation(fields: [productId], references: [id])
+}
+
+// ----------------- PROMOTIONS -----------------
+model Coupon {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  description   String?
+  type          String   @default("PERCENTAGE") // PERCENTAGE | FIXED | PRODUCT | CATEGORY | FIRST_ORDER
+  value         Float
+  minOrder      Float    @default(0)
+  productIds    String   @default("[]")
+  categorySlugs String   @default("[]")
+  customerId    String?
+  usageLimit    Int      @default(0)
+  usedCount     Int      @default(0)
+  startsAt      DateTime?
+  expiresAt     DateTime?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+}
+
+// ----------------- SOCIAL & ENGAGEMENT -----------------
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  userId    String
+  rating    Int
+  title     String?
+  comment   String?
+  isVerified Boolean @default(false)
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model SupportTicket {
+  id          String   @id @default(cuid())
+  ticketNo    String   @unique
+  customerId  String
+  subject     String
+  category    String   @default("GENERAL")
+  priority    String   @default("NORMAL") // LOW | NORMAL | HIGH | URGENT
+  status      String   @default("OPEN") // OPEN | PENDING | IN_PROGRESS | RESOLVED | CLOSED
+  assignedTo  String?
+  messages    String   @default("[]") // JSON array of {from, message, at, isStaff}
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  customer    User     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // ORDER | PAYMENT | SUBSCRIPTION | SUPPORT | PROMO | SYSTEM
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ----------------- CMS & SETTINGS -----------------
+model CMSSection {
+  id            String   @id @default(cuid())
+  sectionKey    String   @unique // HERO | TRENDING | DEALS | BEST_SELLERS | RECENT | TRUST | CATEGORIES
+  title         String
+  subtitle      String?
+  isVisible     Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  config        String   @default("{}") // JSON config for the section
+  desktopVisible Boolean @default(true)
+  mobileVisible Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  title     String
+  imageUrl  String
+  linkUrl   String?
+  position  String   @default("HERO") // HERO | SIDEBAR | MIDPAGE | FOOTER
+  isActive  Boolean  @default(true)
+  startAt   DateTime?
+  endAt     DateTime?
+  sortOrder  Int     @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @default("")
+  group String @default("GENERAL") // GENERAL | STORE | PAYMENTS | EMAIL | SECURITY | SEO | SOCIAL
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorEmail String
+  actorId    String?
+  action     String
+  targetType String?
+  targetId   String?
+  before     String?
+  after      String?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  user       User?    @relation(fields: [actorId], references: [id])
+}

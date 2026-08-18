@@ -1,0 +1,23 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/lib/db'
+import { getSession } from '@/lib/auth'
+
+export async function GET() {
+  const user = await getSession()
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const items = await db.wishlist.findMany({ where: { userId: user.id }, include: { product: true }, orderBy: { createdAt: 'desc' } })
+  return NextResponse.json({ items })
+}
+
+export async function POST(req: NextRequest) {
+  const user = await getSession()
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const { productId } = await req.json()
+  const existing = await db.wishlist.findFirst({ where: { userId: user.id, productId } })
+  if (existing) {
+    await db.wishlist.delete({ where: { id: existing.id } })
+    return NextResponse.json({ ok: true, action: 'removed' })
+  }
+  const item = await db.wishlist.create({ data: { userId: user.id, productId } })
+  return NextResponse.json({ ok: true, action: 'added', item })
+}
