@@ -62,7 +62,7 @@ export function AuthModal() {
 
   const fillAdmin = () => {
     setEmail('admin@playbeat.digital')
-    setPassword('admin123')
+    setPassword('playbeat1122')
     toast.info('Admin credentials filled')
   }
 
@@ -153,7 +153,7 @@ export function AuthModal() {
             <div className="mt-4 p-3 rounded-lg bg-muted/50 border border-border text-xs">
               <div className="font-semibold mb-1">Demo credentials:</div>
               <div className="text-muted-foreground">Customer: customer@playbeat.digital / customer123</div>
-              <div className="text-muted-foreground">Admin: <button onClick={fillAdmin} className="text-brand hover:underline">admin@playbeat.digital / admin123</button></div>
+              <div className="text-muted-foreground">Admin: <button onClick={fillAdmin} className="text-brand hover:underline">admin@playbeat.digital / playbeat1122</button></div>
             </div>
           )}
 
@@ -170,7 +170,7 @@ export function AuthModal() {
 
 // ---------------- Wishlist modal ----------------
 export function WishlistModal() {
-  const { modal, closeModal, products, wishlist, openModal, user } = useStore()
+  const { modal, closeModal, products, wishlist, openModal, user, currency } = useStore()
   const isOpen = modal.type === 'wishlist'
 
   if (!isOpen) return null
@@ -202,7 +202,7 @@ export function WishlistModal() {
                   </div>
                   <div className="p-3">
                     <div className="text-xs font-medium line-clamp-2 min-h-[2rem]">{p.title}</div>
-                    <div className="mt-1 font-bold text-navy dark:text-yellow text-sm">${p.salePrice ?? p.basePrice}</div>
+                    <div className="mt-1 font-bold text-navy dark:text-yellow text-sm">{fmtPrice(p.salePrice ?? p.basePrice, currency)}</div>
                   </div>
                 </button>
               ))}
@@ -216,7 +216,7 @@ export function WishlistModal() {
 
 // ---------------- Search modal ----------------
 export function SearchModal() {
-  const { modal, closeModal, products, categories, openModal, searchQuery, setSearchQuery } = useStore()
+  const { modal, closeModal, products, categories, openModal, searchQuery, setSearchQuery, currency } = useStore()
   const isOpen = modal.type === 'search'
   const [local, setLocal] = useState(searchQuery)
   const [filterCategory, setFilterCategory] = useState('all')
@@ -231,7 +231,11 @@ export function SearchModal() {
   let results = products.filter((p) =>
     (local === '' || p.title.toLowerCase().includes(local.toLowerCase()) || p.shortDesc?.toLowerCase().includes(local.toLowerCase()) || p.tags.some((t) => t.toLowerCase().includes(local.toLowerCase()))) &&
     (filterCategory === 'all' || p.categorySlug === filterCategory) &&
-    (filterPrice === 'all' || (filterPrice === '0-20' && (p.salePrice || p.basePrice) < 20) || (filterPrice === '20-50' && (p.salePrice || p.basePrice) >= 20 && (p.salePrice || p.basePrice) < 50) || (filterPrice === '50-100' && (p.salePrice || p.basePrice) >= 50 && (p.salePrice || p.basePrice) < 100) || (filterPrice === '100+' && (p.salePrice || p.basePrice) >= 100)) &&
+    (filterPrice === 'all' ||
+      (filterPrice === '0-5k' && (p.salePrice || p.basePrice) < 5000) ||
+      (filterPrice === '5k-15k' && (p.salePrice || p.basePrice) >= 5000 && (p.salePrice || p.basePrice) < 15000) ||
+      (filterPrice === '15k-50k' && (p.salePrice || p.basePrice) >= 15000 && (p.salePrice || p.basePrice) < 50000) ||
+      (filterPrice === '50k+' && (p.salePrice || p.basePrice) >= 50000)) &&
     (filterRating === 'all' || p.rating >= parseFloat(filterRating))
   )
 
@@ -271,10 +275,10 @@ export function SearchModal() {
           </select>
           <select value={filterPrice} onChange={(e) => setFilterPrice(e.target.value)} className="h-9 px-2 rounded-lg border border-input bg-background text-sm">
             <option value="all">All prices</option>
-            <option value="0-20">Under $20</option>
-            <option value="20-50">$20 - $50</option>
-            <option value="50-100">$50 - $100</option>
-            <option value="100+">$100+</option>
+            <option value="0-5k">Under Rs 5,000</option>
+            <option value="5k-15k">Rs 5,000 - 15,000</option>
+            <option value="15k-50k">Rs 15,000 - 50,000</option>
+            <option value="50k+">Rs 50,000+</option>
           </select>
           <select value={filterRating} onChange={(e) => setFilterRating(e.target.value)} className="h-9 px-2 rounded-lg border border-input bg-background text-sm">
             <option value="all">All ratings</option>
@@ -306,7 +310,7 @@ export function SearchModal() {
                     </div>
                     <div className="p-2">
                       <div className="text-xs font-medium line-clamp-2 min-h-[2rem]">{p.title}</div>
-                      <div className="mt-1 font-bold text-navy dark:text-yellow text-sm">${p.salePrice ?? p.basePrice}</div>
+                      <div className="mt-1 font-bold text-navy dark:text-yellow text-sm">{fmtPrice(p.salePrice ?? p.basePrice, currency)}</div>
                     </div>
                   </button>
                 ))}

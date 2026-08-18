@@ -1,9 +1,36 @@
 // PlayBeat Digital — UI utilities
 
-export function fmtPrice(n: number, currency = 'USD') {
-  const symbols: Record<string, string> = { USD: '$', EUR: '€', GBP: '£', PKR: 'Rs ', INR: '₹', AED: 'AED ' }
-  const sym = symbols[currency] || '$'
-  return `${sym}${(n || 0).toFixed(2)}`
+// Currency conversion rates relative to PKR (base currency).
+// Base currency for ALL product prices in the database is PKR.
+// When currency === 'PKR', we display the raw value.
+// For other currencies, we convert from PKR to the selected currency.
+export const CURRENCY_RATES: Record<string, number> = {
+  PKR: 1,        // base
+  USD: 1 / 280,  // 1 PKR = 0.00357 USD
+  GBP: 1 / 355,  // 1 PKR = 0.00282 GBP
+  AED: 1 / 76,   // 1 PKR = 0.01316 AED
+  EUR: 1 / 305,
+  INR: 1 / 3.36,
+}
+
+export const CURRENCY_SYMBOLS: Record<string, string> = {
+  USD: '$', EUR: '€', GBP: '£', PKR: 'Rs ', INR: '₹', AED: 'AED ',
+}
+
+export const SUPPORTED_CURRENCIES = ['PKR', 'USD', 'GBP', 'AED']
+
+export function convertPrice(pkrAmount: number, targetCurrency: string): number {
+  const rate = CURRENCY_RATES[targetCurrency] || 1
+  return pkrAmount * rate
+}
+
+export function fmtPrice(pkrAmount: number, currency = 'PKR') {
+  const symbols = CURRENCY_SYMBOLS
+  const sym = symbols[currency] || ''
+  const converted = convertPrice(pkrAmount || 0, currency)
+  // For PKR show no decimals (large whole numbers); for others show 2 decimals
+  if (currency === 'PKR') return `${sym}${Math.round(converted).toLocaleString('en-US')}`
+  return `${sym}${converted.toFixed(2)}`
 }
 
 export function fmtDate(s: string | Date | null | undefined) {

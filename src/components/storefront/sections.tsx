@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import {
   Zap, TrendingUp, Tag, Gift, Shield, Clock, Headphones, RefreshCw,
   Gamepad2, Tv, Server, Megaphone, Bitcoin, Wrench, Download, Package,
-  ArrowRight, ChevronRight, Star, CheckCircle2,
+  ArrowRight, ChevronRight, Star, CheckCircle2, Projector,
 } from 'lucide-react'
 import { useStore } from '@/lib/store'
 import { ProductCard } from './product-card'
@@ -15,14 +15,13 @@ import type { Product, Category } from '@/lib/types'
 
 const CAT_ICONS: Record<string, any> = {
   gaming: Gamepad2, software: Package, 'gift-cards': Gift, streaming: Tv,
-  iptv: Tv, 'social-media': Megaphone, 'web-hosting': Server,
-  'digital-marketing': Megaphone, web3: Bitcoin, services: Wrench,
+  iptv: Tv, 'smart-projectors': Projector, web3: Bitcoin, services: Wrench,
   subscriptions: RefreshCw, 'digital-downloads': Download,
 }
 
 // ---------- Section header ----------
 function SectionHeader({ title, subtitle, icon: Icon, action }: { title: string; subtitle?: string; icon?: any; action?: React.ReactNode }) {
-  const { setSelectedCategory } = useStore()
+  const { setSelectedCategory , currency } = useStore()
   return (
     <div className="flex items-end justify-between mb-6">
       <div className="flex items-center gap-3">
@@ -105,6 +104,7 @@ export function FeaturedCategoriesSection({ categories }: { categories: Category
 
 // ---------- Deals section with countdown ----------
 export function DealsSection({ products, loading }: { products: Product[]; loading: boolean }) {
+  const { currency } = useStore()
   const deals = products.filter((p) => p.isDeal && p.dealEndsAt).slice(0, 4)
   if (!loading && deals.length === 0) return null
 
@@ -150,8 +150,8 @@ export function DealsSection({ products, loading }: { products: Product[]; loadi
                   </div>
                   <h3 className="mt-3 font-semibold text-sm line-clamp-2 text-white">{p.title}</h3>
                   <div className="mt-2 flex items-center gap-2">
-                    <span className="text-xl font-extrabold text-yellow">{fmtPrice(p.salePrice || p.basePrice)}</span>
-                    <span className="text-xs text-white/50 line-through">{fmtPrice(p.basePrice)}</span>
+                    <span className="text-xl font-extrabold text-yellow">{fmtPrice(p.salePrice || p.basePrice, currency)}</span>
+                    <span className="text-xs text-white/50 line-through">{fmtPrice(p.basePrice, currency)}</span>
                     <Badge variant="danger">-{discount}%</Badge>
                   </div>
                 </div>

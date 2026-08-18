@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react'
 import {
   DollarSign, ShoppingCart, Users, Package, RefreshCw, CreditCard,
   LifeBuoy, TrendingUp, ArrowUpRight, ArrowDownRight, Activity,
+  Plus, Settings as SettingsIcon, Tag, Boxes, FileText, Zap,
 } from 'lucide-react'
+import { useStore } from '@/lib/store'
 import { fmtPrice, fmtNumber, fmtCompact, fmtDate, statusColor, cn } from '@/lib/utils'
 
 export function DashboardView() {
+  const { setAdminView } = useStore()
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [range, setRange] = useState('30d')
@@ -170,6 +173,29 @@ export function DashboardView() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {[
+          { label: 'Add Product', icon: Plus, view: 'products' },
+          { label: 'Add Category', icon: Tag, view: 'categories' },
+          { label: 'Add Inventory', icon: Boxes, view: 'inventory' },
+          { label: 'New Coupon', icon: Zap, view: 'coupons' },
+          { label: 'Edit CMS', icon: FileText, view: 'cms' },
+          { label: 'Settings', icon: SettingsIcon, view: 'settings' },
+        ].map((action) => (
+          <button
+            key={action.label}
+            onClick={() => setAdminView(action.view as any)}
+            className="p-4 rounded-2xl bg-card border border-border hover:border-yellow/50 hover:shadow-premium transition-all group text-left"
+          >
+            <div className="w-10 h-10 rounded-xl bg-navy/10 dark:bg-yellow/10 flex items-center justify-center mb-2 group-hover:bg-navy group-hover:text-white dark:group-hover:bg-yellow dark:group-hover:text-navy transition-colors">
+              <action.icon size={18} />
+            </div>
+            <div className="text-sm font-semibold">{action.label}</div>
+          </button>
+        ))}
       </div>
     </div>
   )

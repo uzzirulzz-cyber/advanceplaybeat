@@ -24,7 +24,7 @@ const TABS = [
 ]
 
 export function AccountModal() {
-  const { modal, closeModal, user, logout, products, wishlist, openModal } = useStore()
+  const { modal, closeModal, user, logout, products, wishlist, openModal , currency } = useStore()
   const isOpen = modal.type === 'account'
   const initialTab = isOpen ? (modal.tab || 'overview') : 'overview'
   const [tab, setTab] = useState(initialTab)
@@ -126,7 +126,7 @@ function OverviewTab({ user, setTab }: { user: any; setTab: (t: any) => void }) 
         </div>
         <div className="p-4 rounded-xl bg-card border border-border">
           <Wallet className="w-5 h-5 text-yellow mb-2" />
-          <div className="text-2xl font-bold">{fmtPrice(stats.wallet)}</div>
+          <div className="text-2xl font-bold">{fmtPrice(stats.wallet, currency)}</div>
           <div className="text-xs text-muted-foreground">Wallet Balance</div>
         </div>
         <div className="p-4 rounded-xl bg-card border border-border">
@@ -152,7 +152,7 @@ function OverviewTab({ user, setTab }: { user: any; setTab: (t: any) => void }) 
                   <div className="text-xs text-muted-foreground">{fmtDate(o.createdAt)} • {o.items.length} items</div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="font-bold">{fmtPrice(o.total)}</span>
+                  <span className="font-bold">{fmtPrice(o.total, currency)}</span>
                   <span className={cn('text-xs px-2 py-0.5 rounded', statusColor(o.status))}>{o.status}</span>
                 </div>
               </div>
@@ -191,7 +191,7 @@ function OrdersTab() {
                 <div className="w-10 h-10 rounded-lg bg-navy/10 dark:bg-yellow/10 flex items-center justify-center"><Package size={16} className="text-navy dark:text-yellow" /></div>
                 <div className="text-left">
                   <div className="font-semibold text-sm">{o.orderNumber}</div>
-                  <div className="text-xs text-muted-foreground">{fmtDate(o.createdAt)} • {o.items.length} items • {fmtPrice(o.total)}</div>
+                  <div className="text-xs text-muted-foreground">{fmtDate(o.createdAt)} • {o.items.length} items • {fmtPrice(o.total, currency)}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -308,7 +308,7 @@ function WishlistTab({ products }: { products: any[] }) {
               <div className="aspect-square bg-muted overflow-hidden"><img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover" /></div>
               <div className="p-2">
                 <div className="text-xs font-medium line-clamp-2">{p.title}</div>
-                <div className="mt-1 font-bold text-navy dark:text-yellow text-sm">{fmtPrice(p.salePrice || p.basePrice)}</div>
+                <div className="mt-1 font-bold text-navy dark:text-yellow text-sm">{fmtPrice(p.salePrice || p.basePrice, currency)}</div>
               </div>
             </button>
           ))}
@@ -324,7 +324,7 @@ function WalletTab({ user }: { user: any }) {
       <h2 className="text-2xl font-extrabold mb-4" style={{ fontFamily: 'var(--font-display), system-ui' }}>Wallet & Credits</h2>
       <div className="p-6 rounded-2xl gradient-navy text-white">
         <div className="text-xs uppercase tracking-wider text-yellow mb-1">Available Balance</div>
-        <div className="text-4xl font-extrabold">{fmtPrice(user.walletBalance)}</div>
+        <div className="text-4xl font-extrabold">{fmtPrice(user.walletBalance, currency)}</div>
         <div className="text-xs text-white/70 mt-2">Use wallet balance at checkout for any order</div>
       </div>
       <div className="grid grid-cols-2 gap-3">

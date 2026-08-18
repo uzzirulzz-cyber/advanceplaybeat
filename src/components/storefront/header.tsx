@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import {
   Search, ShoppingCart, Heart, User, Menu, X, Sun, Moon, ChevronDown,
   Zap, Gift, Gamepad2, Tv, Server, Megaphone, Globe2, Bitcoin, Wrench,
-  RefreshCw, Download, Bell, LogOut, LayoutDashboard, Package,
+  RefreshCw, Download, Bell, LogOut, LayoutDashboard, Package, Projector,
 } from 'lucide-react'
 import { useStore } from '@/lib/store'
 import { cn } from '@/lib/utils'
@@ -16,9 +16,7 @@ const CATEGORY_ICONS: Record<string, any> = {
   'gift-cards': Gift,
   streaming: Tv,
   iptv: Tv,
-  'social-media': Megaphone,
-  'web-hosting': Server,
-  'digital-marketing': Megaphone,
+  'smart-projectors': Projector,
   web3: Bitcoin,
   services: Wrench,
   subscriptions: RefreshCw,
@@ -26,7 +24,7 @@ const CATEGORY_ICONS: Record<string, any> = {
 }
 
 export function Header() {
-  const { user, cart, wishlist, theme, toggleTheme, openModal, setView, view, setSelectedCategory, categories } = useStore()
+  const { user, cart, wishlist, theme, toggleTheme, openModal, setView, view, setSelectedCategory, categories, currency, setCurrency } = useStore()
   const [scrolled, setScrolled] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -123,9 +121,17 @@ export function Header() {
                 {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
               </button>
 
-              {/* Currency selector (desktop) */}
-              <select className="hidden xl:block h-9 px-2 rounded-lg text-xs bg-muted border-0 cursor-pointer">
-                <option>USD</option><option>EUR</option><option>GBP</option><option>PKR</option>
+              {/* Currency selector (desktop) — PKR default, with USD/GBP/AED conversion */}
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="hidden xl:block h-9 px-2 rounded-lg text-xs bg-muted border-0 cursor-pointer font-semibold"
+                aria-label="Select currency"
+              >
+                <option value="PKR">PKR ₨</option>
+                <option value="USD">USD $</option>
+                <option value="GBP">GBP £</option>
+                <option value="AED">AED</option>
               </select>
 
               {/* Wishlist */}

@@ -12,7 +12,7 @@ import { RatingStars, Badge } from '@/components/storefront/common'
 import { toast } from 'sonner'
 
 export function ProductDetailModal() {
-  const { modal, closeModal, addToCart, openModal, toggleWishlist, isWishlisted, user } = useStore()
+  const { modal, closeModal, addToCart, openModal, toggleWishlist, isWishlisted, user , currency } = useStore()
   const isOpen = modal.type === 'product'
   const product = isOpen ? modal.product : null
 
@@ -131,10 +131,10 @@ export function ProductDetailModal() {
             {/* Price */}
             <div className="p-4 rounded-xl bg-muted/50 border border-border">
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-extrabold text-navy dark:text-yellow">{fmtPrice(effectivePrice)}</span>
+                <span className="text-3xl font-extrabold text-navy dark:text-yellow">{fmtPrice(effectivePrice, currency)}</span>
                 {discount > 0 && (
                   <>
-                    <span className="text-base text-muted-foreground line-through">{fmtPrice(basePrice)}</span>
+                    <span className="text-base text-muted-foreground line-through">{fmtPrice(basePrice, currency)}</span>
                     <Badge variant="danger">-{discount}%</Badge>
                   </>
                 )}
@@ -165,8 +165,8 @@ export function ProductDetailModal() {
                       >
                         <div className="font-semibold text-sm">{v.name}</div>
                         <div className="flex items-center gap-1.5 mt-1">
-                          <span className="font-bold text-navy dark:text-yellow text-sm">{fmtPrice(vPrice)}</span>
-                          {vDiscount > 0 && <span className="text-[10px] text-muted-foreground line-through">{fmtPrice(v.price)}</span>}
+                          <span className="font-bold text-navy dark:text-yellow text-sm">{fmtPrice(vPrice, currency)}</span>
+                          {vDiscount > 0 && <span className="text-[10px] text-muted-foreground line-through">{fmtPrice(v.price, currency)}</span>}
                         </div>
                         <div className="text-[10px] text-muted-foreground mt-0.5">
                           {v.stock > 0 ? `${v.stock} in stock` : 'Out of stock'}

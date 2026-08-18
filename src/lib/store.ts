@@ -110,7 +110,7 @@ export const useStore = create<AppState>()(
       toggleTheme: () => set((s) => ({ theme: s.theme === 'light' ? 'dark' : 'light' })),
       setTheme: (t) => set({ theme: t }),
 
-      currency: 'USD',
+      currency: 'PKR',
       setCurrency: (c) => set({ currency: c }),
       language: 'en',
       setLanguage: (l) => set({ language: l }),

@@ -52,3 +52,18 @@ prompt
 server.log
 # Skills directory
 /skills/
+
+# Database
+/db/*.db
+/db/*.db-journal
+prisma/migrations/dev.db*
+
+# Upload directory (user-generated content)
+/upload/
+
+# Download directory (user-facing deliverables)
+/download/
+
+# Z-AI internal
+.zscripts/
+.z-ai-config

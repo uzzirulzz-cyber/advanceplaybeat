@@ -12,7 +12,7 @@ import { toast } from 'sonner'
 import { Badge } from '@/components/storefront/common'
 
 export function CartDrawer() {
-  const { modal, closeModal, cart, updateCartQty, removeFromCart, openModal, user, appliedCoupon, setAppliedCoupon } = useStore()
+  const { modal, closeModal, cart, updateCartQty, removeFromCart, openModal, user, appliedCoupon, setAppliedCoupon , currency } = useStore()
   const isOpen = modal.type === 'cart'
 
   const subtotal = cart.reduce((s, c) => s + c.price * c.qty, 0)
@@ -66,7 +66,7 @@ export function CartDrawer() {
                         <button onClick={() => updateCartQty(item.productId, item.variantId, item.qty + 1)} className="w-7 h-7 hover:bg-muted flex items-center justify-center"><Plus size={12} /></button>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm text-navy dark:text-yellow">{fmtPrice(item.price * item.qty)}</span>
+                        <span className="font-bold text-sm text-navy dark:text-yellow">{fmtPrice(item.price * item.qty, currency)}</span>
                         <button onClick={() => removeFromCart(item.productId, item.variantId)} className="text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 w-7 h-7 rounded-md flex items-center justify-center"><Trash2 size={13} /></button>
                       </div>
                     </div>
@@ -80,10 +80,10 @@ export function CartDrawer() {
 
             <div className="border-t border-border p-5 space-y-3">
               <div className="space-y-1.5 text-sm">
-                <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span className="font-medium">{fmtPrice(subtotal)}</span></div>
-                {discount > 0 && <div className="flex justify-between text-emerald-600"><span>Discount ({appliedCoupon?.code})</span><span>−{fmtPrice(discount)}</span></div>}
-                <div className="flex justify-between"><span className="text-muted-foreground">Tax</span><span>{fmtPrice(0)}</span></div>
-                <div className="flex justify-between text-base font-bold pt-2 border-t border-border"><span>Total</span><span className="text-navy dark:text-yellow">{fmtPrice(total)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span className="font-medium">{fmtPrice(subtotal, currency)}</span></div>
+                {discount > 0 && <div className="flex justify-between text-emerald-600"><span>Discount ({appliedCoupon?.code})</span><span>−{fmtPrice(discount, currency)}</span></div>}
+                <div className="flex justify-between"><span className="text-muted-foreground">Tax</span><span>{fmtPrice(0, currency)}</span></div>
+                <div className="flex justify-between text-base font-bold pt-2 border-t border-border"><span>Total</span><span className="text-navy dark:text-yellow">{fmtPrice(total, currency)}</span></div>
               </div>
 
               <button onClick={handleCheckout} className="w-full h-12 rounded-xl bg-navy text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
@@ -125,7 +125,7 @@ function CouponInput() {
         return
       }
       setAppliedCoupon(data)
-      toast.success(`Coupon applied: ${data.coupon.code} — you saved ${fmtPrice(data.discount)}`)
+      toast.success(`Coupon applied: ${data.coupon.code} — you saved ${fmtPrice(data.discount, currency)}`)
       setCode('')
     } catch {
       toast.error('Failed to validate coupon')
@@ -140,7 +140,7 @@ function CouponInput() {
         <div className="flex items-center gap-2 text-sm">
           <Tag size={14} className="text-emerald-600" />
           <span className="font-medium text-emerald-700 dark:text-emerald-300">{appliedCoupon.code}</span>
-          <span className="text-emerald-600 dark:text-emerald-400 text-xs">−{fmtPrice(appliedCoupon.discount)}</span>
+          <span className="text-emerald-600 dark:text-emerald-400 text-xs">−{fmtPrice(appliedCoupon.discount, currency)}</span>
         </div>
         <button onClick={() => { setAppliedCoupon(null); toast.success('Coupon removed') }} className="text-emerald-700 dark:text-emerald-300 text-xs hover:underline">Remove</button>
       </div>
@@ -170,7 +170,7 @@ function CouponInput() {
 
 // ---------------- Checkout Modal ----------------
 export function CheckoutModal() {
-  const { modal, closeModal, cart, user, appliedCoupon, clearCart } = useStore()
+  const { modal, closeModal, cart, user, appliedCoupon, clearCart, currency } = useStore()
   const isOpen = modal.type === 'checkout'
   const [paymentMethod, setPaymentMethod] = useState('STRIPE')
   const [customerInfo, setCustomerInfo] = useState({ name: '', email: '', notes: '' })
@@ -233,7 +233,7 @@ export function CheckoutModal() {
             <h2 className="text-2xl font-extrabold mb-1" style={{ fontFamily: 'var(--font-display), system-ui' }}>Order Confirmed!</h2>
             <p className="text-sm text-muted-foreground mb-4">Order <span className="font-bold text-foreground">{placedOrder.orderNumber}</span></p>
             <div className="rounded-xl bg-muted/50 p-4 mb-4 text-left">
-              <div className="flex justify-between text-sm mb-1"><span className="text-muted-foreground">Amount Paid</span><span className="font-bold">{fmtPrice(placedOrder.total)}</span></div>
+              <div className="flex justify-between text-sm mb-1"><span className="text-muted-foreground">Amount Paid</span><span className="font-bold">{fmtPrice(placedOrder.total, currency)}</span></div>
               <div className="flex justify-between text-sm mb-1"><span className="text-muted-foreground">Payment Status</span><Badge variant="success">{placedOrder.paymentStatus}</Badge></div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Delivery</span><span className="font-medium text-emerald-600">{placedOrder.fulfillmentStatus}</span></div>
             </div>
@@ -280,7 +280,7 @@ export function CheckoutModal() {
                         <div className="text-sm font-medium line-clamp-1">{item.title}</div>
                         <div className="text-xs text-muted-foreground">{item.variantName} × {item.qty}</div>
                       </div>
-                      <div className="font-bold text-sm">{fmtPrice(item.price * item.qty)}</div>
+                      <div className="font-bold text-sm">{fmtPrice(item.price * item.qty, currency)}</div>
                     </div>
                   ))}
                 </div>
@@ -303,7 +303,7 @@ export function CheckoutModal() {
                     <Wallet size={16} className="text-emerald-500" />
                     <div>
                       <div className="text-sm font-medium">Use wallet balance</div>
-                      <div className="text-xs text-muted-foreground">Available: {fmtPrice(user.walletBalance)}</div>
+                      <div className="text-xs text-muted-foreground">Available: {fmtPrice(user.walletBalance, currency)}</div>
                     </div>
                   </div>
                   <input type="checkbox" checked={useWallet} onChange={(e) => setUseWallet(e.target.checked)} className="w-4 h-4" />
@@ -335,10 +335,10 @@ export function CheckoutModal() {
 
               {/* Totals */}
               <div className="rounded-xl bg-muted/50 p-4 space-y-1.5 text-sm">
-                <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span>{fmtPrice(subtotal)}</span></div>
-                {discount > 0 && <div className="flex justify-between text-emerald-600"><span>Coupon ({appliedCoupon?.code})</span><span>−{fmtPrice(discount)}</span></div>}
-                {walletUsed > 0 && <div className="flex justify-between text-emerald-600"><span>Wallet</span><span>−{fmtPrice(walletUsed)}</span></div>}
-                <div className="flex justify-between font-bold text-base pt-2 border-t border-border"><span>Total</span><span className="text-navy dark:text-yellow">{fmtPrice(total)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span>{fmtPrice(subtotal, currency)}</span></div>
+                {discount > 0 && <div className="flex justify-between text-emerald-600"><span>Coupon ({appliedCoupon?.code})</span><span>−{fmtPrice(discount, currency)}</span></div>}
+                {walletUsed > 0 && <div className="flex justify-between text-emerald-600"><span>Wallet</span><span>−{fmtPrice(walletUsed, currency)}</span></div>}
+                <div className="flex justify-between font-bold text-base pt-2 border-t border-border"><span>Total</span><span className="text-navy dark:text-yellow">{fmtPrice(total, currency)}</span></div>
               </div>
 
               {/* Terms */}
@@ -352,7 +352,7 @@ export function CheckoutModal() {
                 disabled={loading || !acceptTerms}
                 className="w-full h-12 rounded-xl bg-navy text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                {loading ? <><Loader2 size={16} className="animate-spin" /> Processing...</> : <><Lock size={16} /> Place Order — {fmtPrice(total)}</>}
+                {loading ? <><Loader2 size={16} className="animate-spin" /> Processing...</> : <><Lock size={16} /> Place Order — {fmtPrice(total, currency)}</>}
               </button>
 
               <div className="flex items-center justify-center gap-3 text-[10px] text-muted-foreground">

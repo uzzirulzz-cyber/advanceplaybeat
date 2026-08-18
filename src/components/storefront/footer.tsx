@@ -79,7 +79,7 @@ export function Footer() {
               <li><button onClick={() => openCat('gift-cards')} className="hover:text-yellow transition-colors">Gift Cards</button></li>
               <li><button onClick={() => openCat('streaming')} className="hover:text-yellow transition-colors">Streaming</button></li>
               <li><button onClick={() => openCat('iptv')} className="hover:text-yellow transition-colors">IPTV</button></li>
-              <li><button onClick={() => openCat('web-hosting')} className="hover:text-yellow transition-colors">Web Hosting</button></li>
+              <li><button onClick={() => openCat('smart-projectors')} className="hover:text-yellow transition-colors">Smart Projectors</button></li>
             </ul>
           </div>
 

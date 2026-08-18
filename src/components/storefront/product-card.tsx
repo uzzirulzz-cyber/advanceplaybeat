@@ -8,7 +8,7 @@ import { fmtPrice, discountPct, cn } from '@/lib/utils'
 import { RatingStars, Badge } from './common'
 
 export function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
-  const { openModal, toggleWishlist, isWishlisted, addToCart, user } = useStore()
+  const { openModal, toggleWishlist, isWishlisted, addToCart, user, currency } = useStore()
 
   const wishlisted = isWishlisted(product.id)
   const discount = discountPct(product.basePrice, product.salePrice || product.basePrice)
@@ -106,9 +106,9 @@ export function ProductCard({ product, compact = false }: { product: Product; co
         <div className="mt-3 flex items-center justify-between gap-2">
           <div className="flex flex-col">
             {discount > 0 && (
-              <span className="text-xs text-muted-foreground line-through">{fmtPrice(product.basePrice)}</span>
+              <span className="text-xs text-muted-foreground line-through">{fmtPrice(product.basePrice, currency)}</span>
             )}
-            <span className="text-lg font-bold text-navy dark:text-yellow">{fmtPrice(effectivePrice)}</span>
+            <span className="text-lg font-bold text-navy dark:text-yellow">{fmtPrice(effectivePrice, currency)}</span>
           </div>
           <button
             onClick={handleQuickAdd}

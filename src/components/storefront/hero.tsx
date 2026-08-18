@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight, Search, Sparkles, Shield, Zap, Star, TrendingUp } from 'lucide-react'
 import { useStore } from '@/lib/store'
+import { fmtPrice } from '@/lib/utils'
 import { timeLeft } from '@/lib/utils'
 
 export function Hero() {
-  const { products, categories, openModal, setSelectedCategory, setView } = useStore()
+  const { products, categories, openModal, setSelectedCategory, setView, currency } = useStore()
   const [searchInput, setSearchInput] = useState('')
 
   const trending = products.filter((p) => p.isTrending).slice(0, 3)
@@ -98,8 +99,8 @@ export function Hero() {
                     </div>
                     <div className="font-bold text-sm line-clamp-2">{trending[0].title}</div>
                     <div className="mt-2 flex items-center gap-2">
-                      <span className="text-yellow font-bold">${trending[0].salePrice ?? trending[0].basePrice}</span>
-                      <span className="text-xs text-white/70 line-through">${trending[0].basePrice}</span>
+                      <span className="text-yellow font-bold">{fmtPrice(trending[0].salePrice ?? trending[0].basePrice, currency)}</span>
+                      <span className="text-xs text-white/70 line-through">{fmtPrice(trending[0].basePrice, currency)}</span>
                     </div>
                   </div>
                 </button>
@@ -113,7 +114,7 @@ export function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent" />
                   <div className="absolute bottom-0 p-3 text-white">
                     <div className="font-semibold text-xs line-clamp-1">{trending[1].title}</div>
-                    <div className="text-yellow font-bold text-sm">${trending[1].salePrice ?? trending[1].basePrice}</div>
+                    <div className="text-yellow font-bold text-sm">{fmtPrice(trending[1].salePrice ?? trending[1].basePrice, currency)}</div>
                   </div>
                 </button>
               )}
@@ -128,7 +129,7 @@ export function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent" />
                   <div className="absolute bottom-0 p-3 text-white">
                     <div className="font-semibold text-xs line-clamp-1">{trending[2].title}</div>
-                    <div className="text-yellow font-bold text-sm">${trending[2].salePrice ?? trending[2].basePrice}</div>
+                    <div className="text-yellow font-bold text-sm">{fmtPrice(trending[2].salePrice ?? trending[2].basePrice, currency)}</div>
                   </div>
                 </button>
               )}
